@@ -92,7 +92,7 @@ export default function Hero() {
             <span className="u-serif-accent pr-[0.06em]" style={{ fontSize: "0.92em" }}>
               move
             </span>
-            <span className="text-accent">.</span>
+            <span className="blink-caret text-accent">.</span>
           </LineReveal>
         </motion.h1>
 

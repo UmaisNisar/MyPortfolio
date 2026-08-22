@@ -72,7 +72,9 @@ export default function About() {
               style={{ fontSize: "clamp(3.5rem, 7vw, 6.5rem)" }}
             >
               {s.value === null ? (
-                <span aria-label="infinite">∞</span>
+                <span aria-label="infinite" className="spin-slow inline-block">
+                  ∞
+                </span>
               ) : (
                 <Counter to={s.value} pad={s.pad} suffix={s.suffix} />
               )}

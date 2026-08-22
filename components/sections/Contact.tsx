@@ -4,6 +4,7 @@ import { site } from "@/data/site";
 import LineReveal from "@/components/animations/LineReveal";
 import Reveal from "@/components/animations/Reveal";
 import Magnetic from "@/components/animations/Magnetic";
+import Drift from "@/components/animations/Drift";
 
 const rows = [
   { label: "EMAIL", href: `mailto:${site.email}`, external: false },
@@ -31,16 +32,22 @@ export default function Contact() {
           className="u-display text-paper lg:col-span-7"
           style={{ fontSize: "clamp(4rem, 13vw, 13rem)" }}
         >
-          <LineReveal duration={1.15}>LET&apos;S</LineReveal>
-          <LineReveal duration={1.15} delay={0.1}>
-            MAKE
-          </LineReveal>
-          <LineReveal duration={1.15} delay={0.2} innerClassName="flex items-baseline">
-            <span className="u-serif-accent" style={{ fontSize: "0.94em" }}>
-              something
-            </span>
-            <span className="text-accent">.</span>
-          </LineReveal>
+          <Drift distance={30}>
+            <LineReveal duration={1.15}>LET&apos;S</LineReveal>
+          </Drift>
+          <Drift distance={-24}>
+            <LineReveal duration={1.15} delay={0.1}>
+              MAKE
+            </LineReveal>
+          </Drift>
+          <Drift distance={38}>
+            <LineReveal duration={1.15} delay={0.2} innerClassName="flex items-baseline">
+              <span className="u-serif-accent" style={{ fontSize: "0.94em" }}>
+                something
+              </span>
+              <span className="text-accent">.</span>
+            </LineReveal>
+          </Drift>
         </h2>
 
         <div className="lg:col-span-4 lg:col-start-9">
@@ -75,20 +82,46 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* Big magnetic CTA */}
+      {/* Big magnetic CTA with rotating ring */}
       <Reveal delay={0.3} className="mt-24 flex justify-center md:mt-32">
         <Magnetic strength={0.25}>
-          <a
-            href={`mailto:${site.email}?subject=New%20project`}
-            className="group relative flex h-44 w-44 items-center justify-center rounded-full border border-line text-center transition-colors duration-500 hover:border-accent md:h-56 md:w-56"
-            data-cursor="none"
-          >
-            <span className="absolute inset-0 scale-0 rounded-full bg-accent transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-100" />
-            <span className="u-label relative z-10 text-paper transition-colors duration-300 group-hover:text-ink">
-              START A<br />
-              PROJECT ↗
-            </span>
-          </a>
+          <div className="relative">
+            {/* Rotating circular text */}
+            <svg
+              className="spin-slower pointer-events-none absolute -inset-9 h-[calc(100%+4.5rem)] w-[calc(100%+4.5rem)] md:-inset-11 md:h-[calc(100%+5.5rem)] md:w-[calc(100%+5.5rem)]"
+              viewBox="0 0 200 200"
+              aria-hidden
+            >
+              <defs>
+                <path
+                  id="cta-ring"
+                  d="M100,100 m-88,0 a88,88 0 1,1 176,0 a88,88 0 1,1 -176,0"
+                />
+              </defs>
+              <text
+                fill="var(--muted)"
+                fontSize="9"
+                fontFamily="var(--font-plex-mono), monospace"
+                letterSpacing="2.6"
+              >
+                <textPath href="#cta-ring">
+                  OPEN FOR PROJECTS ✺ SAY HELLO ✺ OPEN FOR PROJECTS ✺ SAY HELLO ✺
+                </textPath>
+              </text>
+            </svg>
+
+            <a
+              href={`mailto:${site.email}?subject=New%20project`}
+              className="group relative flex h-44 w-44 items-center justify-center rounded-full border border-line text-center transition-colors duration-500 hover:border-accent md:h-56 md:w-56"
+              data-cursor="none"
+            >
+              <span className="absolute inset-0 scale-0 rounded-full bg-accent transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-100" />
+              <span className="u-label relative z-10 text-paper transition-colors duration-300 group-hover:text-ink">
+                START A<br />
+                PROJECT ↗
+              </span>
+            </a>
+          </div>
         </Magnetic>
       </Reveal>
     </section>
