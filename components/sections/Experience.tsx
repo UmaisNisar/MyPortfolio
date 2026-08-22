@@ -32,7 +32,15 @@ export default function Experience() {
         {experience.map((e, i) => (
           <li key={e.company} className="border-b border-line">
             <Reveal delay={i * 0.08} y={40} amount={0.3}>
-              <div className="group grid grid-cols-1 gap-4 py-10 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-x-2 md:grid-cols-12 md:gap-6 md:py-14">
+              <div className="group relative grid grid-cols-1 gap-4 py-10 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-x-2 md:grid-cols-12 md:gap-6 md:py-14">
+                <motion.span
+                  className="absolute -top-px left-0 h-px w-24 origin-left bg-accent"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true, amount: 0.6 }}
+                  transition={{ duration: 0.9, delay: 0.2 + i * 0.12, ease: EASE }}
+                  aria-hidden
+                />
                 <div className="flex items-baseline gap-4 md:col-span-3 md:block">
                   <span className="u-label text-muted-dark transition-colors group-hover:text-accent">
                     {String(i + 1).padStart(2, "0")}
@@ -66,59 +74,73 @@ export default function Experience() {
         ))}
       </ol>
 
-      {/* Education — boxed panel, hover language matches the roles above */}
-      <Reveal className="mt-20 md:mt-28" amount={0.2}>
-        <div className="border border-line bg-ink-soft p-6 md:p-12">
-          <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
-            <h3 className="flex items-center gap-4">
-              <span className="spin-slow inline-block text-accent" aria-hidden>
+      {/* Education — same editorial language and hover behavior as the roles */}
+      <div className="mt-24 md:mt-36">
+        <div className="mb-12 flex flex-wrap items-end justify-between gap-6 md:mb-16">
+          <h3
+            className="u-display text-paper"
+            style={{ fontSize: "clamp(2.25rem, 6vw, 6rem)" }}
+          >
+            <LineReveal duration={1} innerClassName="flex items-baseline gap-[0.25em]">
+              <span>STILL</span>
+              <span className="u-serif-accent" style={{ fontSize: "0.9em" }}>
+                learning
+              </span>
+              <span className="spin-slow inline-block self-center text-accent text-[0.35em]" aria-hidden>
                 ✺
               </span>
-              <span
-                className="u-display text-paper"
-                style={{ fontSize: "clamp(1.75rem, 3.5vw, 3rem)" }}
-              >
-                EDUCATION
-              </span>
-            </h3>
-            <p className="u-label text-muted-dark">
-              CERTIFIED: {certifications[0].toUpperCase()}
-            </p>
-          </div>
+            </LineReveal>
+          </h3>
+          <p className="u-label pb-2 text-muted-dark">
+            ( {certifications[0].toUpperCase()} )
+          </p>
+        </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {education.map((e, i) => (
-              <Reveal key={e.school} delay={0.1 + i * 0.12} y={24}>
-                <div className="group relative overflow-hidden bg-ink px-6 py-8 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-x-2">
+        <ol className="border-t border-line">
+          {education.map((e, i) => (
+            <li key={e.school} className="border-b border-line">
+              <Reveal delay={i * 0.08} y={30} amount={0.4}>
+                <div className="group relative grid grid-cols-1 gap-3 py-8 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-x-2 md:grid-cols-12 md:gap-6 md:py-12">
                   <motion.span
-                    className="absolute inset-x-0 top-0 h-0.5 origin-left bg-accent"
+                    className="absolute -top-px left-0 h-px w-24 origin-left bg-accent"
                     initial={{ scaleX: 0 }}
                     whileInView={{ scaleX: 1 }}
                     viewport={{ once: true, amount: 0.6 }}
-                    transition={{ duration: 1, delay: 0.25 + i * 0.15, ease: EASE }}
+                    transition={{ duration: 0.9, delay: 0.2 + i * 0.12, ease: EASE }}
                     aria-hidden
                   />
-                  <p className="u-label flex items-center justify-between text-muted-dark">
-                    <span className="transition-colors group-hover:text-accent">
+                  <div className="flex items-baseline gap-4 md:col-span-3 md:block">
+                    <span className="u-label text-muted-dark transition-colors group-hover:text-accent">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="u-label block text-muted md:mt-2">
                       {e.duration}
                     </span>
-                    <span>{e.location.toUpperCase()}</span>
-                  </p>
-                  <h4
-                    className="u-display mt-5 text-paper"
-                    style={{ fontSize: "clamp(1.25rem, 1.8vw, 1.75rem)" }}
-                  >
-                    {e.school.toUpperCase()}
-                  </h4>
-                  <p className="u-serif-accent mt-2 text-lg text-muted transition-colors duration-500 group-hover:text-paper">
-                    {e.degree}
-                  </p>
+                  </div>
+
+                  <div className="md:col-span-6">
+                    <h4
+                      className="u-display text-paper"
+                      style={{ fontSize: "clamp(1.5rem, 2.8vw, 2.5rem)" }}
+                    >
+                      {e.school.toUpperCase()}
+                    </h4>
+                    <p className="u-serif-accent mt-1 text-lg text-muted transition-colors duration-500 group-hover:text-paper md:text-xl">
+                      {e.degree}
+                    </p>
+                  </div>
+
+                  <div className="md:col-span-3 md:text-right">
+                    <span className="u-label text-muted-dark">
+                      {e.location.toUpperCase()}
+                    </span>
+                  </div>
                 </div>
               </Reveal>
-            ))}
-          </div>
-        </div>
-      </Reveal>
+            </li>
+          ))}
+        </ol>
+      </div>
     </section>
   );
 }
