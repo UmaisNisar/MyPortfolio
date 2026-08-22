@@ -18,7 +18,7 @@ type Props = {
 };
 
 const variants: Variants = {
-  hidden: { y: "115%", rotate: 2.5 },
+  hidden: { y: "130%", rotate: 2.5 },
   shown: { y: "0%", rotate: 0 },
 };
 
@@ -36,8 +36,10 @@ export default function LineReveal({
   play,
 }: Props) {
   return (
+    // Bottom padding (offset by negative margin) keeps italic descenders
+    // like "g" from being clipped by the reveal mask.
     <motion.span
-      className={`block overflow-hidden ${className}`}
+      className={`block overflow-hidden pb-[0.14em] -mb-[0.14em] ${className}`}
       initial="hidden"
       {...(play === undefined
         ? { whileInView: "shown", viewport: { once: true, amount: 0.4 } }
