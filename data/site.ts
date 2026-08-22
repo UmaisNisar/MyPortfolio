@@ -12,7 +12,7 @@ export const site = {
   timezoneLabel: "ET",
   timezone: "America/Toronto",
   availability: "Available for select projects",
-  url: "https://umaisnisar.vercel.app", // update after deploying
+  url: "https://myportfolio-coral-nu-32.vercel.app",
   description:
     "Umais Nisar — senior software engineer and creative developer crafting cinematic, animation-driven digital experiences where design, code and motion meet.",
   socials: [
