@@ -10,6 +10,30 @@ export type ExperienceEntry = {
   description: string;
 };
 
+export type EducationEntry = {
+  school: string;
+  degree: string;
+  duration: string;
+  location: string;
+};
+
+export const education: EducationEntry[] = [
+  {
+    school: "Laurentian University",
+    degree: "Master of Computational Sciences",
+    duration: "2025 — 2026",
+    location: "Sudbury, Canada",
+  },
+  {
+    school: "FAST — National University of Computer & Emerging Sciences",
+    degree: "Bachelor of Computer Science",
+    duration: "2019 — 2023",
+    location: "Pakistan",
+  },
+];
+
+export const certifications = ["Microsoft AZ-900 — Azure Fundamentals"];
+
 export const experience: ExperienceEntry[] = [
   {
     company: "VCA Software",

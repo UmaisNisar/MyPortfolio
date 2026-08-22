@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import type { Project } from "@/data/projects";
+import { projects, type Project } from "@/data/projects";
 import { usePrefersReducedMotion } from "@/lib/hooks";
 import { useAppReady } from "@/components/providers/Preloader";
 import TransitionLink from "@/components/ui/TransitionLink";
@@ -84,7 +84,7 @@ export default function ProjectView({
             ["CLIENT", project.client],
             ["ROLE", project.role],
             ["YEAR", project.year],
-            ["INDEX", `${project.index} / ${String(6).padStart(2, "0")}`],
+            ["INDEX", `${project.index} / ${String(projects.length).padStart(2, "0")}`],
           ].map(([dt, dd]) => (
             <div key={dt}>
               <dt className="u-label text-muted-dark">{dt}</dt>
@@ -124,6 +124,38 @@ export default function ProjectView({
                 </li>
               ))}
             </ul>
+
+            {(project.live || project.repo) && (
+              <>
+                <p className="u-label mt-10 text-muted-dark">LINKS</p>
+                <ul className="mt-4 flex flex-col gap-2">
+                  {project.live && (
+                    <li>
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="u-label flex items-center justify-between border-b border-line pb-2 text-paper transition-colors hover:text-accent"
+                      >
+                        VISIT LIVE SITE <span className="text-accent">↗</span>
+                      </a>
+                    </li>
+                  )}
+                  {project.repo && (
+                    <li>
+                      <a
+                        href={project.repo}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="u-label flex items-center justify-between border-b border-line pb-2 text-paper transition-colors hover:text-accent"
+                      >
+                        SOURCE ON GITHUB <span className="text-accent">↗</span>
+                      </a>
+                    </li>
+                  )}
+                </ul>
+              </>
+            )}
           </div>
         </aside>
 

@@ -1,5 +1,5 @@
 /**
- * Project data — all demo/fictional work. Replace with real projects.
+ * Real projects, pulled from github.com/UmaisNisar.
  *
  * To add a project:
  *  1. Add an entry here (keep slugs kebab-case).
@@ -25,171 +25,97 @@ export type Project = {
   technologies: string[];
   image: string;
   imageAlt: string;
+  /** Optional outbound links shown on the detail page. */
+  live?: string;
+  repo?: string;
   /** Controls the editorial composition on the home page. */
   layout: "wide" | "left" | "right";
 };
 
 export const projects: Project[] = [
   {
-    slug: "nocturne",
+    slug: "invest-advisor",
     index: "01",
-    title: "Nocturne",
-    category: "Digital Flagship",
+    title: "InvestAdvisor",
+    category: "AI-Powered Web App",
     year: "2026",
-    client: "Nocturne Atelier",
-    role: "Design & Frontend Development",
+    client: "Personal product",
+    role: "Design & Full-Stack Development",
     description:
-      "A cinematic digital flagship for an independent fashion atelier — built around darkness, type and restraint.",
+      "A personal AI investment advisor that watches my portfolio, screens the market and tells me where to look next.",
     overview:
-      "Nocturne Atelier needed a home on the web that felt like their runway shows: dark, deliberate and quiet until it moves. The site treats each collection as a scene, with typography carrying the narrative and imagery revealed through motion rather than layout.",
+      "InvestAdvisor is a single-user investment monitoring and advisory tool I built for my own portfolio. It pulls holdings and live market data, has an LLM review the entire portfolio in one pass, and surfaces per-holding calls — add, hold, trim or sell — each with a conviction level and a data-grounded reason, plus a daily cross-asset shortlist of where to look next.",
     challenge:
-      "Fashion sites tend to collapse into grids of lookbook thumbnails. The atelier wanted the opposite — an experience where a single garment can hold the entire viewport, and where navigation feels like moving through a space rather than clicking through pages.",
+      "LLM output is only useful for investing if it can be trusted not to hallucinate. Every call had to be grounded in real numbers, API costs had to stay near zero, and the data layer had to cover stocks, ETFs and crypto across three currencies — using only free-tier sources.",
     approach:
-      "The design language borrows from printed show invitations: oversized condensed type, generous black space and a single signal color used only for wayfinding. Every layout was composed on a strict 12-column grid, then deliberately broken in one place per scene.",
+      "A percentile-rank factor model (growth, valuation, momentum, quality, analyst and insider signals) forms the quantitative spine. The LLM narrates on top of scored data instead of inventing figures, and the consolidated daily analysis is capped to a single call to control cost. The dashboard surfaces the strongest calls first.",
     interaction:
-      "Scroll velocity drives the pace of image reveals, so slow scrolling feels like studying a garment and fast scrolling like walking past it. A custom cursor becomes the only visible UI inside collection scenes.",
+      "A responsive MudBlazor dashboard that works on a phone: drop in a Wealthsimple CSV export and holdings reconstruct themselves into quotable tickers, a watchlist fires on price targets, and email alerts flag drift or critical warnings.",
     development:
-      "Built as a fully static Next.js site with GSAP scene choreography and a Lenis-driven scroll timeline. All imagery is lazy-loaded and transform-animated only, holding a steady 60fps on mid-range hardware.",
+      "C# and Blazor end to end. Multi-source pricing stitches together Finnhub for US equities, Yahoo Finance for international listings, CoinGecko for crypto and Frankfurter for FX — with everything converted to USD at live rates for totals and P/L.",
     result:
-      "The flagship became the atelier's most-shared piece of marketing, doubling average session length against their previous site.",
-    technologies: ["Next.js", "TypeScript", "GSAP", "Lenis", "Tailwind CSS"],
-    image: "/projects/nocturne.svg",
-    imageAlt: "Nocturne — dark editorial composition with orbital forms",
+      "It's now my daily research tool — portfolio-wide analysis on demand without a premium data subscription, while every trade decision stays human.",
+    technologies: ["C#", ".NET", "Blazor", "MudBlazor", "LLM APIs", "SQL"],
+    image: "/projects/invest-advisor.svg",
+    imageAlt: "InvestAdvisor — market signal line with portfolio call markers",
+    repo: "https://github.com/UmaisNisar/InvestAdvisor",
     layout: "wide",
   },
   {
-    slug: "pulsegrid",
+    slug: "the-hidden-gem",
     index: "02",
-    title: "Pulsegrid",
-    category: "Interactive Experience",
+    title: "The Hidden Gem",
+    category: "Photography Portfolio",
     year: "2025",
-    client: "Pulsegrid Festival",
-    role: "Creative Development",
+    client: "The Hidden Gem",
+    role: "Design & Development",
     description:
-      "A real-time audio-reactive visual identity for an electronic music festival, running entirely in the browser.",
+      "A portfolio and booking site for a sports photography and videography studio — built to let the work lead.",
     overview:
-      "Pulsegrid asked for a site that could feel like the festival itself: a system of pulsing geometry that reacts to sound and touch. The identity is generated live — no two visitors see exactly the same page.",
+      "The Hidden Gem shoots sports — action photography, team photos, event coverage and highlight reels. Their site is a portfolio-first experience where galleries and video carry the story, backed by a booking flow so a visit can turn directly into a session.",
     challenge:
-      "Audio-reactive visuals usually mean heavy WebGL builds that exclude older devices. The brief demanded the same energy on a three-year-old phone as on a studio display, with a hard performance budget.",
+      "Sports photography lives on energy, and most portfolio templates flatten it. The site had to frame heavy imagery without stealing attention from it, stay fast on phones where most visitors arrive, and turn interest into bookings without a back-and-forth email chain.",
     approach:
-      "Instead of shaders, the visual system is built from a dense canvas grid of points whose displacement, scale and color respond to a lightweight analysis loop. The grid doubles as the navigation background, so the identity is never decoration — it is the interface.",
+      "Gallery-first information architecture: photography and reels front and center, services and booking one gesture away. Motion is used to give stills momentum — transitions and reveals that echo the pace of the sports being shot.",
     interaction:
-      "Pointer movement injects energy into the grid; on mobile, the accelerometer nudges it. Lineup entries magnetize toward the cursor, and the schedule is explored through a scrubbed horizontal timeline.",
+      "Interactive galleries for browsing shoots, a video section for highlight reels, an integrated session-booking flow and a direct contact form.",
     development:
-      "A single requestAnimationFrame loop drives the whole system with object pooling and zero per-frame allocation. The site degrades gracefully: reduced-motion visitors get a still composition of the same grid.",
+      "Next.js with TypeScript and Tailwind CSS, Radix UI primitives for accessible components, React Hook Form for the booking and contact flows, and Framer Motion for the animation layer.",
     result:
-      "Festival ticket pages saw a 3× increase in dwell time, and the visual system was reused across screens on site.",
-    technologies: ["React", "TypeScript", "Canvas 2D", "Framer Motion"],
-    image: "/projects/pulsegrid.svg",
-    imageAlt: "Pulsegrid — pulsing dot grid distorted by a waveform",
+      "Shipped as the studio's home on the web — galleries, reels and session booking in one place.",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Radix UI", "Framer Motion"],
+    image: "/projects/the-hidden-gem.svg",
+    imageAlt: "The Hidden Gem — camera aperture blades and frame markings",
+    repo: "https://github.com/UmaisNisar/the-hidden-gem",
     layout: "left",
   },
   {
-    slug: "atlas-archive",
+    slug: "tandoori-tastes",
     index: "03",
-    title: "Atlas Archive",
-    category: "Editorial Platform",
+    title: "Tandoori Tastes",
+    category: "Restaurant Site & CMS",
     year: "2025",
-    client: "Atlas Press",
-    role: "Design & Frontend Development",
+    client: "Tandoori Tastes",
+    role: "Design & Development",
     description:
-      "A digital archive of brutalist architecture, treated like an oversized printed index you can walk through.",
+      "A restaurant website with a complete self-serve admin panel — the owner runs everything without a developer.",
     overview:
-      "Atlas Press digitized four decades of photography of concrete architecture. The archive presents each building as an editorial spread — plate number, coordinates, huge imagery — rather than a searchable database.",
+      "Tandoori Tastes needed more than a brochure: a warm, appetizing public site and a way for the owner to change what's on it — menu, specials, hours, photos — without ever calling a developer. The project pairs a mobile-first storefront with a full content management panel.",
     challenge:
-      "Archives die when they feel like spreadsheets. The task was to make three hundred entries browsable without a single dropdown filter, keeping the tactility of the printed volumes the press is known for.",
+      "Restaurant sites go stale the moment a menu changes. The real problem wasn't the public pages — it was giving a non-technical owner safe, complete control over menu items, holiday hours, announcements, reviews and gallery images from day one.",
     approach:
-      "The index is a continuous vertical scroll of typographic plates; imagery loads only when a plate is opened. Metadata is set in a strict monospaced system inspired by archival catalog cards, and every page number, coordinate and date is real content, not ornament.",
+      "A warm, menu-first design for guests, and a protected admin panel organized around the owner's actual tasks: update a dish, post a special, set holiday hours, approve a testimonial, upload photos. Every piece of public content is editable.",
     interaction:
-      "Hovering a plate reveals its photograph behind the type, tilted by cursor position. A drag-driven horizontal strip lets visitors flip through a building's full set of photographs like contact sheets.",
+      "Guests browse a dynamic menu, current announcements and specials, store hours and a gallery. The owner signs into the admin panel and edits the same content through simple forms with image upload.",
     development:
-      "Static generation renders all three hundred plates at build time. Images are aggressively sized through the framework's image pipeline, and the whole archive weighs less than a single uncompressed archive photograph.",
+      "Next.js 14 App Router with TypeScript and Tailwind CSS. Content lives in SQLite through Prisma ORM, and the admin panel is secured with NextAuth v5 authentication.",
     result:
-      "The archive was featured in three design publications and became the press's primary sales channel for the printed volumes.",
-    technologies: ["Next.js", "TypeScript", "Framer Motion", "Tailwind CSS"],
-    image: "/projects/atlas-archive.svg",
-    imageAlt: "Atlas Archive — brutalist geometric blocks and archival grid",
-    layout: "right",
-  },
-  {
-    slug: "verra",
-    index: "04",
-    title: "Verra",
-    category: "E-Commerce Concept",
-    year: "2024",
-    client: "Verra Objects",
-    role: "Frontend Development",
-    description:
-      "A slow-commerce storefront for sculptural homeware, where every product page reads like a catalog essay.",
-    overview:
-      "Verra makes six objects a year. Their store rejects the conventions of e-commerce urgency — no sales, no countdowns — in favor of long-form product storytelling with a deliberate, unhurried pace.",
-    challenge:
-      "Conversion patterns and editorial pacing usually fight each other. The store needed to keep a purchase always one gesture away without ever letting commerce interrupt the reading experience.",
-    approach:
-      "Each object's page is a single scroll narrative: material studies, process photography and the maker's notes, with a persistent, quiet purchase bar that only asserts itself when scrolling stops. Typography does the selling.",
-    interaction:
-      "Product photography responds to the cursor with a subtle parallax between object and shadow. The cart is a full-screen takeover with its own choreographed entrance rather than a slide-out tray.",
-    development:
-      "Built fully static with client-side cart state, keeping the stack deployable from a repository alone. Checkout hands off to a hosted payment page, so the storefront itself needs no backend at all.",
-    result:
-      "The concept validated slow-commerce for the studio: average order value rose while support requests fell.",
-    technologies: ["Next.js", "TypeScript", "Framer Motion", "Zustand"],
-    image: "/projects/verra.svg",
-    imageAlt: "Verra — still-life arrangement of abstract sculptural forms",
-    layout: "left",
-  },
-  {
-    slug: "signal-path",
-    index: "05",
-    title: "Signal Path",
-    category: "Data Storytelling",
-    year: "2024",
-    client: "Meridian Research",
-    role: "Design & Frontend Development",
-    description:
-      "An interactive annual report that turns a year of research data into a scroll-driven signal journey.",
-    overview:
-      "Meridian's annual report had lived in PDFs for a decade. Signal Path rebuilds it as a single continuous scroll where each chapter's data draws itself as the reader arrives, in one uninterrupted line.",
-    challenge:
-      "Data storytelling often decorates numbers instead of explaining them. Every animated chart had to earn its motion — movement only where it clarified change over time, magnitude or connection.",
-    approach:
-      "One continuous SVG path — the 'signal' — runs the entire length of the report, becoming in turn a timeline, a line chart and a divider. Chapters are typeset like a printed annual with numbered folios and marginal annotations.",
-    interaction:
-      "Scroll position draws the signal path and triggers chart states. Key figures count up in place, and readers can scrub any chart backward simply by scrolling back — nothing is fire-once.",
-    development:
-      "Charts are hand-built SVG animated with scroll-linked timelines, not a charting library, keeping the bundle small and the motion fully art-directed. All data ships as static JSON at build time.",
-    result:
-      "Report readership tripled year over year, and completion analytics showed most readers reaching the final chapter.",
-    technologies: ["React", "TypeScript", "GSAP", "SVG"],
-    image: "/projects/signal-path.svg",
-    imageAlt: "Signal Path — continuous line drawing through chart forms",
-    layout: "wide",
-  },
-  {
-    slug: "kinetic-type",
-    index: "06",
-    title: "Kinetic Type",
-    category: "Experiment",
-    year: "2023",
-    client: "Self-initiated",
-    role: "Everything",
-    description:
-      "A self-initiated playground of typographic motion studies — type that stretches, shatters and breathes.",
-    overview:
-      "Kinetic Type is an ongoing series of browser-native motion studies: variable fonts pushed through scroll, cursor and time. Each study isolates a single idea and refuses to add a second one.",
-    challenge:
-      "Experiments sprawl. The constraint was one interaction per study, shipping monthly, each performant enough to run full-screen on a phone — a discipline of subtraction rather than accumulation.",
-    approach:
-      "Every study is built on the same minimal chassis: one variable font, one input (scroll, cursor or clock), one transformation. The series identity comes from the consistency of the chassis, not a shared visual style.",
-    interaction:
-      "Studies include weight that follows scroll velocity, glyphs that scatter from the cursor and re-set themselves, and a clock face typeset entirely through variable font axes shifting in real time.",
-    development:
-      "Each study is a self-contained route sharing a tiny animation core built on requestAnimationFrame and the Web Animations API. The whole series ships without a single animation dependency.",
-    result:
-      "The series became the most-visited part of the portfolio and the origin of techniques used across client work.",
-    technologies: ["TypeScript", "Variable Fonts", "Web Animations API"],
-    image: "/projects/kinetic-type.svg",
-    imageAlt: "Kinetic Type — oversized glyphs mid-transformation",
+      "Deployed on Vercel and handed off — the owner manages the entire site personally, with no developer involvement since launch.",
+    technologies: ["Next.js 14", "TypeScript", "Tailwind CSS", "Prisma", "NextAuth"],
+    image: "/projects/tandoori-tastes.svg",
+    imageAlt: "Tandoori Tastes — plate ring with rising steam and menu lines",
+    live: "https://tandoori-taste-website.vercel.app",
+    repo: "https://github.com/UmaisNisar/TandooriTasteWebsite",
     layout: "right",
   },
 ];
