@@ -8,7 +8,7 @@ export const site = {
   wordmark: "UMAIS NISAR",
   role: "Senior Software Engineer & Creative Developer",
   email: "umais.nisar01@gmail.com",
-  location: "Sudbury, Canada",
+  location: "Toronto, Canada",
   timezoneLabel: "ET",
   timezone: "America/Toronto",
   availability: "Available for select projects",
