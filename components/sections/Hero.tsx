@@ -8,6 +8,7 @@ import { useFinePointer, usePrefersReducedMotion } from "@/lib/hooks";
 import { useAppReady } from "@/components/providers/Preloader";
 import { useLenis } from "@/components/providers/SmoothScroll";
 import LineReveal from "@/components/animations/LineReveal";
+import Magnetic from "@/components/animations/Magnetic";
 import HeroCanvas from "./HeroCanvas";
 
 export default function Hero() {
@@ -34,10 +35,10 @@ export default function Hero() {
     [finePointer, reduced, mx, my],
   );
 
-  const scrollToWork = () =>
+  const scrollTo = (hash: string) =>
     lenis
-      ? lenis.scrollTo("#work", { duration: 1.4 })
-      : document.querySelector("#work")?.scrollIntoView({ behavior: "smooth" });
+      ? lenis.scrollTo(hash, { duration: 1.4 })
+      : document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" });
 
   const lineDelay = (i: number) => 0.15 + i * 0.12;
 
@@ -71,33 +72,71 @@ export default function Hero() {
         </p>
       </motion.div>
 
-      {/* Display statement */}
-      <motion.h1
-        className="u-display relative z-10 select-none text-paper"
-        style={{
-          x: typeX,
-          y: typeY,
-          fontSize: "clamp(4rem, min(16.5vw, 20svh), 15rem)",
-        }}
-      >
-        <LineReveal play={ready} delay={lineDelay(0)} duration={1.15}>
-          I MAKE
-        </LineReveal>
-        <LineReveal play={ready} delay={lineDelay(1)} duration={1.15}>
-          THE WEB
-        </LineReveal>
-        <LineReveal play={ready} delay={lineDelay(2)} duration={1.15}>
-          <span className="u-serif-accent pr-[0.06em]" style={{ fontSize: "0.92em" }}>
-            move
-          </span>
-          <span className="text-accent">.</span>
-        </LineReveal>
-      </motion.h1>
+      {/* Display statement + intro + CTAs */}
+      <div className="relative z-10">
+        <motion.h1
+          className="u-display select-none text-paper"
+          style={{
+            x: typeX,
+            y: typeY,
+            fontSize: "clamp(3.5rem, min(16.5vw, 18svh), 14rem)",
+          }}
+        >
+          <LineReveal play={ready} delay={lineDelay(0)} duration={1.15}>
+            I MAKE
+          </LineReveal>
+          <LineReveal play={ready} delay={lineDelay(1)} duration={1.15}>
+            THE WEB
+          </LineReveal>
+          <LineReveal play={ready} delay={lineDelay(2)} duration={1.15}>
+            <span className="u-serif-accent pr-[0.06em]" style={{ fontSize: "0.92em" }}>
+              move
+            </span>
+            <span className="text-accent">.</span>
+          </LineReveal>
+        </motion.h1>
+
+        <motion.div
+          className="mt-8 flex flex-col gap-7 md:mt-10 md:flex-row md:items-center md:justify-between"
+          initial={{ opacity: 0, y: 18 }}
+          animate={ready ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.9, delay: 0.75, ease: EASE }}
+        >
+          <p className="u-body max-w-md text-sm text-muted">
+            I&apos;m Umais — a senior software engineer in Toronto crafting
+            fast, animated, obsessively detailed experiences for the web.
+          </p>
+          <div className="flex items-center gap-4">
+            <Magnetic strength={0.25}>
+              <button
+                onClick={() => scrollTo("#work")}
+                className="u-label group flex items-center gap-3 bg-accent px-7 py-4 text-ink transition-transform duration-300 hover:scale-[1.04]"
+              >
+                VIEW WORK
+                <motion.span
+                  animate={reduced ? {} : { y: [0, 3, 0] }}
+                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  ↓
+                </motion.span>
+              </button>
+            </Magnetic>
+            <Magnetic strength={0.25}>
+              <button
+                onClick={() => scrollTo("#contact")}
+                className="u-label border border-line px-7 py-4 text-paper transition-colors duration-300 hover:border-accent hover:text-accent"
+              >
+                CONTACT →
+              </button>
+            </Magnetic>
+          </div>
+        </motion.div>
+      </div>
 
       {/* Bottom row */}
       <div className="relative z-10 flex items-end justify-between">
         <motion.button
-          onClick={scrollToWork}
+          onClick={() => scrollTo("#work")}
           className="u-label group flex items-center gap-3 text-muted transition-colors hover:text-paper"
           initial={{ opacity: 0, y: 12 }}
           animate={ready ? { opacity: 1, y: 0 } : {}}

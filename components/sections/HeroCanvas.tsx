@@ -58,6 +58,8 @@ export default function HeroCanvas() {
 
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
+      // Ambient breathing so the field feels alive even without a cursor.
+      const t = reduced ? 0 : performance.now() / 1000;
       for (const d of dots) {
         const dx = d.x - mouse.x;
         const dy = d.y - mouse.y;
@@ -71,15 +73,20 @@ export default function HeroCanvas() {
         d.x += (d.ox - d.x) * RETURN;
         d.y += (d.oy - d.y) * RETURN;
 
-        // Dots near the cursor pick up the accent and grow slightly.
+        const phase = (d.ox + d.oy) * 0.012;
+        const driftX = Math.sin(t * 0.55 + phase) * 3.2;
+        const driftY = Math.cos(t * 0.45 + phase * 1.3) * 3.2;
+        const pulse = 0.5 + 0.5 * Math.sin(t * 0.8 + phase * 2);
+
+        // Dots near the cursor pick up a lighter violet and grow slightly.
         const heat = Math.max(0, 1 - dist / INFLUENCE);
-        const radius = 1.1 + heat * 1.3;
+        const radius = 1 + pulse * 0.5 + heat * 1.3;
         ctx.beginPath();
-        ctx.arc(d.x, d.y, radius, 0, Math.PI * 2);
+        ctx.arc(d.x + driftX, d.y + driftY, radius, 0, Math.PI * 2);
         ctx.fillStyle =
           heat > 0.05
             ? `rgba(216, 164, 255, ${0.25 + heat * 0.55})`
-            : "rgba(191, 95, 255, 0.22)";
+            : `rgba(191, 95, 255, ${0.14 + pulse * 0.14})`;
         ctx.fill();
       }
     };
