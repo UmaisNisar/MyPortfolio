@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Umais Nisar — Portfolio
 
-## Getting Started
+An experimental, animation-driven personal portfolio. 100% static frontend —
+no backend, no APIs, no environment variables. Built with:
 
-First, run the development server:
+- **Next.js 16** (App Router, static generation, Turbopack)
+- **TypeScript** + **Tailwind CSS v4**
+- **Framer Motion** (reveals, transitions, marquee, cursor states)
+- **GSAP + ScrollTrigger** (pinned horizontal expertise section)
+- **Lenis** (smooth scrolling)
+
+## Run locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deploy
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Push to GitHub and import the repository in Vercel. No configuration needed.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Customizing
 
-## Learn More
+All content lives in `data/` — no component edits required:
 
-To learn more about Next.js, take a look at the following resources:
+| File | What it holds |
+| --- | --- |
+| `data/site.ts` | Name, email, location, socials, availability, site URL |
+| `data/projects.ts` | Projects (currently fictional demos) + case-study copy |
+| `data/experience.ts` | Experience timeline entries |
+| `data/skills.ts` | Expertise categories for the horizontal section |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Add a project:** add an entry to `data/projects.ts` and drop its poster in
+`public/projects/<slug>.svg` (or `.jpg`/`.png` — update the `image` path).
+The detail page, home feature and next-project link are generated from data.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Change the accent color:** edit `--accent` in `app/globals.css`
+(also used in the SVG posters and `app/opengraph-image.tsx`).
 
-## Deploy on Vercel
+**After deploying:** update `site.url` in `data/site.ts` so Open Graph
+metadata and the sitemap point at your real domain.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+app/                  routes, layout, SEO (og image, icon, sitemap, robots)
+app/work/[slug]/      project detail experience
+components/
+  animations/         reveal / magnetic / scramble / counter primitives
+  providers/          Lenis smooth scroll, preloader, page transitions
+  sections/           home page sections
+  ui/                 custom cursor, scroll progress, transition link
+data/                 ALL editable content
+lib/                  motion constants, hooks
+public/projects/      poster artwork
+```
+
+## Accessibility & performance
+
+- Respects `prefers-reduced-motion` everywhere (Lenis, GSAP, Framer, cursor)
+- Custom cursor is desktop-only; mobile gets native interactions
+- Canvas hero pauses off-screen; animations are transform/opacity only
+- Semantic HTML, skip link, keyboard-visible focus states
