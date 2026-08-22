@@ -2,6 +2,7 @@
 
 import { projects } from "@/data/projects";
 import LineReveal from "@/components/animations/LineReveal";
+import Drift from "@/components/animations/Drift";
 import ProjectFeature from "./ProjectFeature";
 
 export default function Work() {
@@ -13,11 +14,15 @@ export default function Work() {
           <p className="u-label text-muted-dark">( {String(projects.length).padStart(2, "0")} )</p>
         </div>
         <h2 className="u-display mt-8 text-paper" style={{ fontSize: "clamp(3.5rem, 12vw, 12rem)" }}>
-          <LineReveal duration={1.1}>SELECTED</LineReveal>
-          <LineReveal duration={1.1} delay={0.1}>
-            <span className="pl-[0.6em]">WORK</span>
-            <span className="text-accent">*</span>
-          </LineReveal>
+          <Drift distance={36}>
+            <LineReveal duration={1.1}>SELECTED</LineReveal>
+          </Drift>
+          <Drift distance={-36}>
+            <LineReveal duration={1.1} delay={0.1}>
+              <span className="pl-[0.6em]">WORK</span>
+              <span className="text-accent">*</span>
+            </LineReveal>
+          </Drift>
         </h2>
       </div>
 

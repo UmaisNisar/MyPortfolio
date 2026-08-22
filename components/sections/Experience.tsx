@@ -5,6 +5,7 @@ import { certifications, education, experience } from "@/data/experience";
 import { EASE } from "@/lib/motion";
 import Reveal from "@/components/animations/Reveal";
 import LineReveal from "@/components/animations/LineReveal";
+import Drift from "@/components/animations/Drift";
 
 export default function Experience() {
   return (
@@ -19,13 +20,17 @@ export default function Experience() {
       </div>
 
       <h2 className="u-display mb-16 text-paper md:mb-24" style={{ fontSize: "clamp(3rem, 9vw, 9rem)" }}>
-        <LineReveal duration={1.1}>THE ROAD</LineReveal>
-        <LineReveal duration={1.1} delay={0.1} innerClassName="flex items-baseline gap-[0.25em]">
-          <span className="u-serif-accent" style={{ fontSize: "0.9em" }}>
-            so far
-          </span>
-          <span className="text-accent">→</span>
-        </LineReveal>
+        <Drift distance={30}>
+          <LineReveal duration={1.1}>THE ROAD</LineReveal>
+        </Drift>
+        <Drift distance={-30}>
+          <LineReveal duration={1.1} delay={0.1} innerClassName="flex items-baseline gap-[0.25em]">
+            <span className="u-serif-accent" style={{ fontSize: "0.9em" }}>
+              so far
+            </span>
+            <span className="text-accent">→</span>
+          </LineReveal>
+        </Drift>
       </h2>
 
       <ol className="border-t border-line">

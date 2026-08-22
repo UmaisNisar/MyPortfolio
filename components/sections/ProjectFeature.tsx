@@ -1,7 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+  useVelocity,
+} from "framer-motion";
 import { useRef } from "react";
 import type { Project } from "@/data/projects";
 import { usePrefersReducedMotion } from "@/lib/hooks";
@@ -28,6 +34,17 @@ function Visual({
   });
   const y = useTransform(scrollYProgress, [0, 1], ["-7%", "7%"]);
 
+  // Images lean with scroll velocity — a liquid feel while browsing.
+  const { scrollY } = useScroll();
+  const scrollVelocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(scrollVelocity, {
+    damping: 40,
+    stiffness: 220,
+  });
+  const skewY = useTransform(smoothVelocity, [-1200, 1200], [2.2, -2.2], {
+    clamp: true,
+  });
+
   return (
     <div
       ref={ref}
@@ -36,7 +53,7 @@ function Visual({
     >
       <motion.div
         className="absolute -inset-y-[8%] inset-x-0 will-change-transform"
-        style={reduced ? undefined : { y }}
+        style={reduced ? undefined : { y, skewY }}
       >
         <Image
           src={project.image}
