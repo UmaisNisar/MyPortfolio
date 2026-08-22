@@ -23,13 +23,12 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState<string | null>(null);
+  // Only meaningful on the home page — elsewhere no section is active.
+  const activeSection = pathname === "/" ? active : null;
 
   // Scrollspy — highlight the section currently in view.
   useEffect(() => {
-    if (pathname !== "/") {
-      setActive(null);
-      return;
-    }
+    if (pathname !== "/") return;
     let io: IntersectionObserver | null = null;
     const raf = requestAnimationFrame(() => {
       const sections = nav
@@ -128,7 +127,7 @@ export default function Navbar() {
           {/* Desktop links */}
           <ul className="hidden items-center gap-9 md:flex">
             {nav.map((item, i) => {
-              const isActive = active === item.href;
+              const isActive = activeSection === item.href;
               return (
                 <li key={item.href}>
                   <button

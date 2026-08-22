@@ -25,9 +25,10 @@ export const site = {
   ],
 } as const;
 
+// Order matches the scroll order of sections on the home page.
 export const nav = [
-  { label: "Work", href: "#work" },
   { label: "About", href: "#about" },
+  { label: "Work", href: "#work" },
   { label: "Experience", href: "#experience" },
   { label: "Contact", href: "#contact" },
 ] as const;

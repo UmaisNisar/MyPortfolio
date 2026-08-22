@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-label="The Hidden Gem poster">
+  <rect width="1600" height="1200" fill="#141413"/>
+  <!-- viewfinder frame corners -->
+  <g stroke="#e9e7e1" stroke-opacity="0.5" stroke-width="3" fill="none">
+    <path d="M120 200 L120 120 L200 120"/>
+    <path d="M1400 120 L1480 120 L1480 200"/>
+    <path d="M1480 1000 L1480 1080 L1400 1080"/>
+    <path d="M200 1080 L120 1080 L120 1000"/>
+  </g>
+  <!-- aperture blades -->
+  <g fill="none" stroke="#e9e7e1">
+    <circle cx="800" cy="600" r="330" stroke-opacity="0.35"/>
+    <circle cx="800" cy="600" r="240" stroke-opacity="0.2"/>
+    <g stroke-opacity="0.55" stroke-width="2">
+      <path d="M800 270 L960 470 L800 600 Z"/>
+      <path d="M1086 435 L1010 680 L800 600 Z"/>
+      <path d="M1086 765 L830 810 L800 600 Z"/>
+      <path d="M800 930 L640 730 L800 600 Z"/>
+      <path d="M514 765 L590 520 L800 600 Z"/>
+      <path d="M514 435 L770 390 L800 600 Z"/>
+    </g>
+  </g>
+  <circle cx="800" cy="600" r="60" fill="#bf5fff"/>
+  <circle cx="822" cy="578" r="14" fill="#141413" fill-opacity="0.55"/>
+  <!-- crosshairs -->
+  <g stroke="#e9e7e1" stroke-opacity="0.3">
+    <line x1="800" y1="150" x2="800" y2="200"/>
+    <line x1="800" y1="1000" x2="800" y2="1050"/>
+    <line x1="220" y1="600" x2="270" y2="600"/>
+    <line x1="1330" y1="600" x2="1380" y2="600"/>
+  </g>
+  <text x="150" y="180" font-family="monospace" font-size="26" letter-spacing="6" fill="#e9e7e1" fill-opacity="0.55">THE HIDDEN GEM — 02</text>
+  <text x="150" y="1044" font-family="monospace" font-size="22" letter-spacing="5" fill="#e9e7e1" fill-opacity="0.35">f/2.8 · 1/1000s · ISO 400</text>
+  <text x="1450" y="1044" text-anchor="end" font-family="monospace" font-size="22" letter-spacing="5" fill="#bf5fff" fill-opacity="0.8">REC ●</text>
+</svg>

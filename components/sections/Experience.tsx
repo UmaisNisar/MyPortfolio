@@ -1,6 +1,6 @@
 "use client";
 
-import { experience } from "@/data/experience";
+import { certifications, education, experience } from "@/data/experience";
 import Reveal from "@/components/animations/Reveal";
 import LineReveal from "@/components/animations/LineReveal";
 
@@ -63,6 +63,51 @@ export default function Experience() {
           </li>
         ))}
       </ol>
+
+      {/* Education — deliberately distinct from the roles above */}
+      <Reveal className="mt-20 md:mt-28" amount={0.2}>
+        <div className="border border-line bg-ink-soft p-6 md:p-12">
+          <div className="mb-10 flex flex-wrap items-baseline justify-between gap-4">
+            <h3 className="flex items-baseline gap-4">
+              <span className="u-label text-accent">+</span>
+              <span
+                className="u-display text-paper"
+                style={{ fontSize: "clamp(1.75rem, 3.5vw, 3rem)" }}
+              >
+                EDUCATION
+              </span>
+            </h3>
+            <p className="u-label text-muted-dark">
+              CERTIFIED: {certifications[0].toUpperCase()}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {education.map((e, i) => (
+              <Reveal
+                key={e.school}
+                delay={0.1 + i * 0.1}
+                y={24}
+                className="border-t-2 border-accent bg-ink px-6 py-8"
+              >
+                <p className="u-label flex items-center justify-between text-muted-dark">
+                  <span>{e.duration}</span>
+                  <span>{e.location.toUpperCase()}</span>
+                </p>
+                <h4
+                  className="u-display mt-5 text-paper"
+                  style={{ fontSize: "clamp(1.25rem, 1.8vw, 1.75rem)" }}
+                >
+                  {e.school.toUpperCase()}
+                </h4>
+                <p className="u-serif-accent mt-2 text-lg text-muted">
+                  {e.degree}
+                </p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </Reveal>
     </section>
   );
 }

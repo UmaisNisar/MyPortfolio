@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-label="Tandoori Tastes poster">
+  <rect width="1600" height="1200" fill="#171614"/>
+  <g stroke="#e9e7e1" stroke-opacity="0.06">
+    <line x1="400" y1="0" x2="400" y2="1200"/>
+    <line x1="1200" y1="0" x2="1200" y2="1200"/>
+    <line x1="0" y1="600" x2="1600" y2="600"/>
+  </g>
+  <!-- plate -->
+  <g fill="none">
+    <circle cx="640" cy="640" r="330" stroke="#e9e7e1" stroke-opacity="0.4"/>
+    <circle cx="640" cy="640" r="260" stroke="#e9e7e1" stroke-opacity="0.18"/>
+    <circle cx="640" cy="640" r="90" fill="#221f1c" stroke="#e9e7e1" stroke-opacity="0.3"/>
+  </g>
+  <!-- steam -->
+  <g fill="none" stroke="#bf5fff" stroke-width="4" stroke-linecap="round">
+    <path d="M560 360 Q 590 300 560 250 Q 530 200 560 150"/>
+    <path d="M640 340 Q 670 280 640 230 Q 610 180 640 130" stroke-opacity="0.7"/>
+    <path d="M720 360 Q 750 300 720 250 Q 690 200 720 150" stroke-opacity="0.45"/>
+  </g>
+  <!-- menu lines -->
+  <g stroke="#e9e7e1" stroke-opacity="0.3">
+    <line x1="1080" y1="420" x2="1460" y2="420"/>
+    <line x1="1080" y1="520" x2="1460" y2="520"/>
+    <line x1="1080" y1="620" x2="1460" y2="620"/>
+    <line x1="1080" y1="720" x2="1460" y2="720"/>
+    <line x1="1080" y1="820" x2="1400" y2="820"/>
+  </g>
+  <g font-family="monospace" font-size="20" letter-spacing="4" fill="#e9e7e1" fill-opacity="0.4">
+    <text x="1080" y="404">STARTERS</text>
+    <text x="1080" y="504">TANDOOR</text>
+    <text x="1080" y="604">CURRIES</text>
+    <text x="1080" y="704">BREADS</text>
+    <text x="1080" y="804">DESSERTS</text>
+  </g>
+  <circle cx="1436" cy="497" r="7" fill="#bf5fff"/>
+  <text x="72" y="112" font-family="monospace" font-size="26" letter-spacing="6" fill="#e9e7e1" fill-opacity="0.55">TANDOORI TASTES — 03</text>
+  <text x="72" y="1128" font-family="monospace" font-size="22" letter-spacing="5" fill="#e9e7e1" fill-opacity="0.35">OPEN 11:00 — 22:00 / MENU MANAGED IN-HOUSE</text>
+  <text x="1528" y="1128" text-anchor="end" font-family="monospace" font-size="22" letter-spacing="5" fill="#bf5fff" fill-opacity="0.8">FRESH</text>
+</svg>

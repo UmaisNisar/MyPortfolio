@@ -52,7 +52,7 @@ export const skillCategories: SkillCategory[] = [
   {
     index: "04",
     title: "Technology",
-    blurb: "A full-stack past that keeps the frontend honest and shippable.",
+    blurb: "The production stack of the day job — shipped, secured, maintained.",
     items: ["ASP.NET Core", "Blazor", "C#", "SQL Server", "Azure", "EF Core"],
   },
 ];

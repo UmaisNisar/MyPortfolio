@@ -6,7 +6,7 @@ import Counter from "@/components/animations/Counter";
 
 const stats = [
   { value: 3, pad: 2, suffix: "+", label: "YEARS EXPERIENCE" },
-  { value: 20, pad: 2, suffix: "+", label: "PROJECTS SHIPPED" },
+  { value: 10, pad: 2, suffix: "+", label: "PRODUCTS SHIPPED" },
   { value: null, pad: 0, suffix: "∞", label: "CURIOSITY" },
 ] as const;
 
@@ -41,17 +41,18 @@ export default function About() {
       <div className="mt-16 grid grid-cols-1 gap-10 md:mt-24 md:grid-cols-12">
         <Reveal className="md:col-span-4 md:col-start-6" delay={0.1}>
           <p className="u-body text-base text-ink/80">
-            I&apos;m {`Umais`} — a frontend developer with a designer&apos;s
-            eye and an engineer&apos;s discipline. I build websites that treat
-            the browser as a medium, not a document viewer: type that responds,
-            layouts that breathe, interfaces that feel physical.
+            I&apos;m Umais — a senior software engineer based in Toronto. By
+            day I build full-stack products in .NET and Blazor; the rest of
+            the time I treat the browser as a medium, not a document viewer —
+            type that responds, layouts that breathe, interfaces that feel
+            physical.
           </p>
         </Reveal>
         <Reveal className="md:col-span-3 md:col-start-10" delay={0.2}>
           <p className="u-body text-sm text-muted-dark">
-            My background spans creative frontend work and full-stack
-            engineering, which means the experimental stuff still ships on
-            time, works on a phone, and survives production.
+            That double life is the point: the engineering background means
+            the experimental work still ships on time, works on a phone, and
+            survives production.
           </p>
         </Reveal>
       </div>
