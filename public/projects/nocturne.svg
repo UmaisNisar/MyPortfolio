@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-label="Nocturne poster">
+  <rect width="1600" height="1200" fill="#141412"/>
+  <g stroke="#e9e7e1" stroke-opacity="0.05">
+    <line x1="400" y1="0" x2="400" y2="1200"/>
+    <line x1="800" y1="0" x2="800" y2="1200"/>
+    <line x1="1200" y1="0" x2="1200" y2="1200"/>
+    <line x1="0" y1="600" x2="1600" y2="600"/>
+  </g>
+  <g fill="none" stroke="#e9e7e1" stroke-opacity="0.5">
+    <ellipse cx="800" cy="600" rx="520" ry="200" transform="rotate(-18 800 600)"/>
+    <ellipse cx="800" cy="600" rx="420" ry="150" transform="rotate(-18 800 600)" stroke-opacity="0.3"/>
+    <ellipse cx="800" cy="600" rx="620" ry="255" transform="rotate(-18 800 600)" stroke-opacity="0.2"/>
+  </g>
+  <circle cx="800" cy="600" r="150" fill="#0c0c0b" stroke="#e9e7e1" stroke-opacity="0.35"/>
+  <circle cx="800" cy="600" r="149" fill="none" stroke="#000" stroke-opacity="0.4"/>
+  <circle cx="1237" cy="437" r="10" fill="#bf5fff"/>
+  <circle cx="363" cy="763" r="5" fill="#e9e7e1" fill-opacity="0.6"/>
+  <text x="72" y="112" font-family="monospace" font-size="26" letter-spacing="6" fill="#e9e7e1" fill-opacity="0.55">NOCTURNE — 01</text>
+  <text x="72" y="1128" font-family="monospace" font-size="22" letter-spacing="5" fill="#e9e7e1" fill-opacity="0.35">DIGITAL FLAGSHIP / 2026</text>
+  <text x="1528" y="1128" text-anchor="end" font-family="monospace" font-size="22" letter-spacing="5" fill="#bf5fff" fill-opacity="0.8">N.</text>
+</svg>
