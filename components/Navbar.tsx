@@ -22,6 +22,34 @@ export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [active, setActive] = useState<string | null>(null);
+
+  // Scrollspy — highlight the section currently in view.
+  useEffect(() => {
+    if (pathname !== "/") {
+      setActive(null);
+      return;
+    }
+    let io: IntersectionObserver | null = null;
+    const raf = requestAnimationFrame(() => {
+      const sections = nav
+        .map((n) => document.getElementById(n.href.slice(1)))
+        .filter((el): el is HTMLElement => el !== null);
+      io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) setActive(`#${e.target.id}`);
+          }
+        },
+        { rootMargin: "-35% 0px -55% 0px" },
+      );
+      sections.forEach((s) => io!.observe(s));
+    });
+    return () => {
+      cancelAnimationFrame(raf);
+      io?.disconnect();
+    };
+  }, [pathname]);
 
   useMotionValueEvent(scrollY, "change", (y) => {
     const prev = scrollY.getPrevious() ?? 0;
@@ -99,19 +127,31 @@ export default function Navbar() {
 
           {/* Desktop links */}
           <ul className="hidden items-center gap-9 md:flex">
-            {nav.map((item, i) => (
-              <li key={item.href}>
-                <button
-                  onClick={() => goTo(item.href)}
-                  className="u-label group flex items-baseline gap-1.5 text-muted transition-colors hover:text-paper"
-                >
-                  <span className="text-[0.5625rem] text-muted-dark transition-colors group-hover:text-accent">
-                    0{i + 1}
-                  </span>
-                  <ScrambleText text={item.label.toUpperCase()} />
-                </button>
-              </li>
-            ))}
+            {nav.map((item, i) => {
+              const isActive = active === item.href;
+              return (
+                <li key={item.href}>
+                  <button
+                    onClick={() => goTo(item.href)}
+                    aria-current={isActive ? "true" : undefined}
+                    className={`u-label group flex items-baseline gap-1.5 border-b pb-0.5 transition-colors ${
+                      isActive
+                        ? "border-accent text-paper"
+                        : "border-transparent text-muted hover:text-paper"
+                    }`}
+                  >
+                    <span
+                      className={`text-[0.5625rem] transition-colors group-hover:text-accent ${
+                        isActive ? "text-accent" : "text-muted-dark"
+                      }`}
+                    >
+                      0{i + 1}
+                    </span>
+                    <ScrambleText text={item.label.toUpperCase()} />
+                  </button>
+                </li>
+              );
+            })}
           </ul>
 
           {/* Mobile toggle */}

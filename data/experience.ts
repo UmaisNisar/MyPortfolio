@@ -1,6 +1,5 @@
 /**
  * Experience timeline — sourced from the real resume.
- * Check the VCA Software start date; it was assumed as 2025.
  */
 
 export type ExperienceEntry = {
@@ -15,7 +14,7 @@ export const experience: ExperienceEntry[] = [
   {
     company: "VCA Software",
     role: "Senior Software Engineer",
-    duration: "2025 — Now",
+    duration: "Sep 2026 — Now",
     technologies: ["C#", ".NET", "SQL", "Azure"],
     description:
       "Senior engineering across the stack — owning features end to end, from architecture and APIs to the interfaces people actually touch.",
@@ -23,7 +22,7 @@ export const experience: ExperienceEntry[] = [
   {
     company: "Enable App Inc.",
     role: "Full Stack Developer",
-    duration: "2024 — 2025",
+    duration: "Feb 2024 — Aug 2026",
     technologies: ["Blazor WASM", "ASP.NET Core", "Azure", "MSSQL"],
     description:
       "Built multiple products end to end — ERP data pipelines, Stripe and Zoho integrations, CQRS clean architecture and a modular inspection-reporting system.",
@@ -31,7 +30,7 @@ export const experience: ExperienceEntry[] = [
   {
     company: "MRS Technologies",
     role: "Software Engineer I",
-    duration: "2024 — 2025",
+    duration: "Oct 2024 — Mar 2025",
     technologies: ["Blazor Server", "MudBlazor", "EF Core", "SQL Server"],
     description:
       "Developed responsive Blazor Server applications with robust REST APIs, hardened authentication with Identity Core and tuned database performance.",
@@ -39,7 +38,7 @@ export const experience: ExperienceEntry[] = [
   {
     company: "The Byng Group",
     role: "Jr. Full Stack Developer",
-    duration: "2023 — 2024",
+    duration: "Jun 2023 — Feb 2024",
     technologies: ["Blazor WASM", ".NET MAUI", "SQL"],
     description:
       "Enhanced a Blazor WebAssembly product and re-architected the migration of a 500,000-line Silverlight codebase to Blazor.",

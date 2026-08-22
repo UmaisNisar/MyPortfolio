@@ -156,6 +156,14 @@ html.lenis body {
 /*  Marquee                                                            */
 /* ------------------------------------------------------------------ */
 
+.spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
 .marquee-outline {
   color: transparent;
   -webkit-text-stroke: 1px var(--muted);

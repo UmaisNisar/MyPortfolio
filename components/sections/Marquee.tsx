@@ -28,7 +28,11 @@ function Row() {
           >
             {w}
           </span>
-          <span className="text-accent" aria-hidden style={{ fontSize: "clamp(1rem, 2vw, 1.75rem)" }}>
+          <span
+            className="spin-slow inline-block self-center text-accent"
+            aria-hidden
+            style={{ fontSize: "clamp(1rem, 2vw, 1.75rem)" }}
+          >
             ✺
           </span>
         </span>
