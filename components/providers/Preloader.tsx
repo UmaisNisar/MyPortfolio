@@ -28,9 +28,33 @@ export function useAppReady() {
 
 export function AppReadyProvider({ children }: { children: ReactNode }) {
   const [ready, setReady] = useState(false);
+
+  // A fresh visit always starts the experience at the top: disable the
+  // browser's scroll restoration and clear any stale #hash so reloads
+  // don't jump straight into a section behind the preloader.
+  useEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
+    if (window.location.hash) {
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+  }, []);
+
   return (
     <AppReadyContext.Provider value={ready}>
-      <Preloader onDone={() => setReady(true)} done={ready} />
+      <Preloader
+        onDone={() => {
+          setReady(true);
+          // Strip any stale #hash after hydration so the next reload
+          // starts clean (the router re-syncs the URL early on).
+          if (window.location.hash) {
+            window.history.replaceState(null, "", window.location.pathname);
+          }
+        }}
+        done={ready}
+      />
       {children}
     </AppReadyContext.Provider>
   );
