@@ -1,4 +1,34 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-label="The Hidden Gem poster">
+  <style>
+    .hg-blades {
+      transform-origin: 800px 600px;
+      animation: hg-rotate 46s linear infinite;
+    }
+    .hg-rings {
+      transform-origin: 800px 600px;
+      animation: hg-rotate 70s linear infinite reverse;
+    }
+    @keyframes hg-rotate {
+      to { transform: rotate(360deg); }
+    }
+    .hg-lens {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: hg-lens 4s ease-in-out infinite;
+    }
+    @keyframes hg-lens {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+    }
+    .hg-rec { animation: hg-rec 1.4s steps(1) infinite; }
+    @keyframes hg-rec {
+      0%, 55% { opacity: 0.8; }
+      56%, 100% { opacity: 0.15; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; }
+    }
+  </style>
   <rect width="1600" height="1200" fill="#141413"/>
   <!-- viewfinder frame corners -->
   <g stroke="#e9e7e1" stroke-opacity="0.5" stroke-width="3" fill="none">
@@ -7,20 +37,20 @@
     <path d="M1480 1000 L1480 1080 L1400 1080"/>
     <path d="M200 1080 L120 1080 L120 1000"/>
   </g>
-  <!-- aperture blades -->
-  <g fill="none" stroke="#e9e7e1">
-    <circle cx="800" cy="600" r="330" stroke-opacity="0.35"/>
+  <!-- aperture rings + blades -->
+  <g class="hg-rings" fill="none" stroke="#e9e7e1">
+    <circle cx="800" cy="600" r="330" stroke-opacity="0.35" stroke-dasharray="40 18"/>
     <circle cx="800" cy="600" r="240" stroke-opacity="0.2"/>
-    <g stroke-opacity="0.55" stroke-width="2">
-      <path d="M800 270 L960 470 L800 600 Z"/>
-      <path d="M1086 435 L1010 680 L800 600 Z"/>
-      <path d="M1086 765 L830 810 L800 600 Z"/>
-      <path d="M800 930 L640 730 L800 600 Z"/>
-      <path d="M514 765 L590 520 L800 600 Z"/>
-      <path d="M514 435 L770 390 L800 600 Z"/>
-    </g>
   </g>
-  <circle cx="800" cy="600" r="60" fill="#bf5fff"/>
+  <g class="hg-blades" fill="none" stroke="#e9e7e1" stroke-opacity="0.55" stroke-width="2">
+    <path d="M800 270 L960 470 L800 600 Z"/>
+    <path d="M1086 435 L1010 680 L800 600 Z"/>
+    <path d="M1086 765 L830 810 L800 600 Z"/>
+    <path d="M800 930 L640 730 L800 600 Z"/>
+    <path d="M514 765 L590 520 L800 600 Z"/>
+    <path d="M514 435 L770 390 L800 600 Z"/>
+  </g>
+  <circle class="hg-lens" cx="800" cy="600" r="60" fill="#bf5fff"/>
   <circle cx="822" cy="578" r="14" fill="#141413" fill-opacity="0.55"/>
   <!-- crosshairs -->
   <g stroke="#e9e7e1" stroke-opacity="0.3">
@@ -31,5 +61,5 @@
   </g>
   <text x="150" y="180" font-family="monospace" font-size="26" letter-spacing="6" fill="#e9e7e1" fill-opacity="0.55">THE HIDDEN GEM — 02</text>
   <text x="150" y="1044" font-family="monospace" font-size="22" letter-spacing="5" fill="#e9e7e1" fill-opacity="0.35">f/2.8 · 1/1000s · ISO 400</text>
-  <text x="1450" y="1044" text-anchor="end" font-family="monospace" font-size="22" letter-spacing="5" fill="#bf5fff" fill-opacity="0.8">REC ●</text>
+  <text class="hg-rec" x="1450" y="1044" text-anchor="end" font-family="monospace" font-size="22" letter-spacing="5" fill="#bf5fff">REC ●</text>
 </svg>

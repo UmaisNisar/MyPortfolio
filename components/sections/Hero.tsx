@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { site } from "@/data/site";
 import { EASE } from "@/lib/motion";
 import { useFinePointer, usePrefersReducedMotion } from "@/lib/hooks";
@@ -16,6 +16,24 @@ export default function Hero() {
   const lenis = useLenis();
   const finePointer = useFinePointer();
   const reduced = usePrefersReducedMotion();
+
+  // Greets in the visitor's local time.
+  const [greeting, setGreeting] = useState("HELLO");
+  useEffect(() => {
+    const id = requestAnimationFrame(() => {
+      const h = new Date().getHours();
+      setGreeting(
+        h < 5
+          ? "UP LATE?"
+          : h < 12
+            ? "GOOD MORNING"
+            : h < 17
+              ? "GOOD AFTERNOON"
+              : "GOOD EVENING",
+      );
+    });
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   // Normalized cursor position → gentle parallax on the type block.
   const mx = useMotionValue(0);
@@ -59,9 +77,9 @@ export default function Hero() {
         transition={{ duration: 1, delay: 1 }}
       >
         <p className="u-label text-muted">
-          PORTFOLIO — 2026
+          {greeting} <span className="text-accent">—</span>
           <br />
-          <span className="text-muted-dark">FOLIO / 001</span>
+          <span className="text-muted-dark">PORTFOLIO / 2026</span>
         </p>
         <p className="u-label hidden text-right text-muted sm:block">
           {site.role.toUpperCase()}

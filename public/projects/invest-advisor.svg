@@ -1,4 +1,45 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-label="InvestAdvisor poster">
+  <style>
+    .ia-draw {
+      stroke-dasharray: 720;
+      animation: ia-draw 5s cubic-bezier(0.65, 0, 0.35, 1) infinite alternate;
+    }
+    @keyframes ia-draw {
+      from { stroke-dashoffset: 720; }
+      to { stroke-dashoffset: 0; }
+    }
+    .ia-pulse {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: ia-pulse 2.4s ease-in-out infinite;
+    }
+    .ia-pulse.d2 { animation-delay: 0.8s; }
+    @keyframes ia-pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.7); opacity: 0.55; }
+    }
+    .ia-blink { animation: ia-blink 3.2s steps(1) infinite; }
+    .ia-blink.d2 { animation-delay: 1.6s; }
+    @keyframes ia-blink {
+      0%, 70% { opacity: 1; }
+      71%, 100% { opacity: 0.25; }
+    }
+    .ia-bar {
+      transform-box: fill-box;
+      transform-origin: bottom;
+      animation: ia-bar 3.6s ease-in-out infinite alternate;
+    }
+    .ia-bar.d2 { animation-delay: 0.5s; }
+    .ia-bar.d3 { animation-delay: 1s; }
+    @keyframes ia-bar {
+      from { transform: scaleY(0.55); }
+      to { transform: scaleY(1); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; }
+      .ia-draw { stroke-dasharray: none; }
+    }
+  </style>
   <rect width="1600" height="1200" fill="#131312"/>
   <g stroke="#e9e7e1" stroke-opacity="0.07">
     <line x1="0" y1="240" x2="1600" y2="240"/>
@@ -12,24 +53,24 @@
   </g>
   <path d="M0 900 L200 880 L320 800 L440 830 L560 700 L680 740 L800 580 L920 620 L1040 470 L1160 520 L1280 380 L1420 330 L1600 300"
         fill="none" stroke="#e9e7e1" stroke-opacity="0.45" stroke-width="3"/>
-  <path d="M560 700 L680 740 L800 580 L920 620 L1040 470"
+  <path class="ia-draw" d="M560 700 L680 740 L800 580 L920 620 L1040 470"
         fill="none" stroke="#bf5fff" stroke-width="5"/>
   <g>
-    <circle cx="800" cy="580" r="8" fill="#bf5fff"/>
-    <circle cx="1040" cy="470" r="8" fill="#bf5fff"/>
+    <circle class="ia-pulse" cx="800" cy="580" r="8" fill="#bf5fff"/>
+    <circle class="ia-pulse d2" cx="1040" cy="470" r="8" fill="#bf5fff"/>
     <circle cx="1280" cy="380" r="6" fill="#e9e7e1" fill-opacity="0.8"/>
   </g>
   <g font-family="monospace" font-size="20" letter-spacing="4">
-    <text x="770" y="540" fill="#bf5fff">ADD</text>
-    <text x="1010" y="430" fill="#bf5fff">HOLD</text>
+    <text class="ia-blink" x="770" y="540" fill="#bf5fff">ADD</text>
+    <text class="ia-blink d2" x="1010" y="430" fill="#bf5fff">HOLD</text>
     <text x="1250" y="340" fill="#e9e7e1" fill-opacity="0.5">TRIM</text>
   </g>
   <g fill="#e9e7e1" fill-opacity="0.18">
-    <rect x="120" y="1020" width="40" height="60"/>
-    <rect x="180" y="1000" width="40" height="80"/>
-    <rect x="240" y="1040" width="40" height="40"/>
-    <rect x="300" y="980" width="40" height="100"/>
-    <rect x="360" y="1010" width="40" height="70"/>
+    <rect class="ia-bar" x="120" y="1020" width="40" height="60"/>
+    <rect class="ia-bar d2" x="180" y="1000" width="40" height="80"/>
+    <rect class="ia-bar d3" x="240" y="1040" width="40" height="40"/>
+    <rect class="ia-bar" x="300" y="980" width="40" height="100"/>
+    <rect class="ia-bar d2" x="360" y="1010" width="40" height="70"/>
   </g>
   <rect x="420" y="1060" width="40" height="20" fill="#bf5fff" fill-opacity="0.8"/>
   <text x="72" y="112" font-family="monospace" font-size="26" letter-spacing="6" fill="#e9e7e1" fill-opacity="0.55">INVESTADVISOR — 01</text>

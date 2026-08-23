@@ -8,6 +8,8 @@ import SmoothScroll from "@/components/providers/SmoothScroll";
 import { AppReadyProvider } from "@/components/providers/Preloader";
 import { TransitionProvider } from "@/components/providers/TransitionProvider";
 import CustomCursor from "@/components/ui/CustomCursor";
+import ClickSparks from "@/components/ui/ClickSparks";
+import CursorCompanion from "@/components/ui/CursorCompanion";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -73,6 +75,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${archivo.variable} ${instrument.variable} ${plexMono.variable} antialiased`}
     >
       <body className="grain bg-ink text-paper">
+        {/* Apply the stored lights-on theme before first paint. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(localStorage.getItem("lights")==="on")document.documentElement.classList.add("lights-on")}catch(e){}`,
+          }}
+        />
         <a
           href="#main"
           className="u-label sr-only z-300 bg-accent px-4 py-3 text-ink focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
@@ -84,6 +92,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <AppReadyProvider>
               <TransitionProvider>
                 <CustomCursor />
+                <CursorCompanion />
+                <ClickSparks />
                 <ScrollProgress />
                 <Navbar />
                 <main id="main">{children}</main>
