@@ -1,12 +1,13 @@
 import Link from "next/link";
+import NotFoundGame from "@/components/NotFoundGame";
 
 export default function NotFound() {
   return (
-    <section className="flex min-h-svh flex-col items-start justify-center px-6 md:px-10">
+    <section className="flex min-h-svh flex-col items-start justify-center px-6 py-28 md:px-10">
       <p className="u-label text-muted-dark">ERROR — 404</p>
       <h1
         className="u-display mt-6 text-paper"
-        style={{ fontSize: "clamp(4rem, 16vw, 14rem)" }}
+        style={{ fontSize: "clamp(3.5rem, 12vw, 11rem)" }}
       >
         LOST IN
         <br />
@@ -21,6 +22,8 @@ export default function NotFound() {
       >
         BACK HOME →
       </Link>
+
+      <NotFoundGame />
     </section>
   );
 }

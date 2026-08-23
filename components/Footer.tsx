@@ -33,6 +33,16 @@ export default function Footer() {
   const lenis = useLenis();
   const year = new Date().getFullYear();
 
+  // A small nod to night owls, in the visitor's local time.
+  const [upLate, setUpLate] = useState(false);
+  useEffect(() => {
+    const id = requestAnimationFrame(() => {
+      const h = new Date().getHours();
+      setUpLate(h >= 0 && h < 5);
+    });
+    return () => cancelAnimationFrame(id);
+  }, []);
+
   return (
     <footer className="hairline-t bg-ink px-6 pb-8 pt-14 md:px-10">
       <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-12">
@@ -80,6 +90,7 @@ export default function Footer() {
       <div className="mt-14 flex items-end justify-between">
         <p className="u-label text-muted-dark">
           © {year} — DESIGNED &amp; BUILT BY {site.name.toUpperCase()}
+          {upLate && <span className="text-accent"> ( YOU&apos;RE UP LATE )</span>}
         </p>
         <button
           onClick={() =>

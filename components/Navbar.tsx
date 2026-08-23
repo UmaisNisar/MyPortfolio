@@ -8,6 +8,7 @@ import {
   useMotionValueEvent,
   useScroll,
 } from "framer-motion";
+import { Lightbulb } from "lucide-react";
 import { nav, site } from "@/data/site";
 import { EASE } from "@/lib/motion";
 import { useLenis } from "@/components/providers/SmoothScroll";
@@ -25,6 +26,29 @@ export default function Navbar() {
   const [active, setActive] = useState<string | null>(null);
   // Only meaningful on the home page — elsewhere no section is active.
   const activeSection = pathname === "/" ? active : null;
+
+  // Lights-on theme toggle (class applied pre-hydration by layout script).
+  const [lights, setLights] = useState(false);
+  useEffect(() => {
+    const id = requestAnimationFrame(() =>
+      setLights(document.documentElement.classList.contains("lights-on")),
+    );
+    return () => cancelAnimationFrame(id);
+  }, []);
+  const toggleLights = () => {
+    const apply = () => {
+      const on = document.documentElement.classList.toggle("lights-on");
+      try {
+        localStorage.setItem("lights", on ? "on" : "off");
+      } catch {}
+      setLights(on);
+    };
+    const doc = document as Document & {
+      startViewTransition?: (cb: () => void) => void;
+    };
+    if (doc.startViewTransition) doc.startViewTransition(apply);
+    else apply();
+  };
 
   // Scrollspy — highlight the section currently in view.
   useEffect(() => {
@@ -118,12 +142,15 @@ export default function Navbar() {
         >
           <button
             onClick={goHome}
-            className="u-label text-paper transition-colors hover:text-accent"
+            className="u-label group text-paper transition-colors hover:text-accent"
           >
-            <ScrambleText text={site.wordmark} />
-            <span className="text-accent">&nbsp;©</span>
+            <ScrambleText text={site.wordmark} />{" "}
+            <span className="inline-block text-accent transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:rotate-[360deg]">
+              ©
+            </span>
           </button>
 
+          <div className="flex items-center gap-6">
           {/* Desktop links */}
           <ul className="hidden items-center gap-9 md:flex">
             {nav.map((item, i) => {
@@ -153,6 +180,18 @@ export default function Navbar() {
             })}
           </ul>
 
+          {/* Lights toggle */}
+          <button
+            onClick={toggleLights}
+            aria-pressed={lights}
+            aria-label={lights ? "Lights off" : "Lights on"}
+            className={`transition-colors hover:text-accent md:ml-3 ${
+              lights ? "text-accent" : "text-muted"
+            }`}
+          >
+            <Lightbulb size={15} strokeWidth={1.5} />
+          </button>
+
           {/* Mobile toggle */}
           <button
             className="u-label relative z-260 flex h-10 items-center gap-3 text-paper md:hidden"
@@ -172,6 +211,7 @@ export default function Navbar() {
               />
             </span>
           </button>
+          </div>
         </nav>
       </motion.header>
 

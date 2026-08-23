@@ -7,12 +7,17 @@ const SPACING = 60;
 const INFLUENCE = 190; // px radius of cursor influence
 const PUSH = 30; // max displacement
 const RETURN = 0.075; // lerp back to rest
+const WAVE_SPEED = 12;
+const WAVE_BAND = 80; // thickness of the shockwave front
+const WAVE_PUSH = 30;
 
 type Dot = { ox: number; oy: number; x: number; y: number };
+type Wave = { x: number; y: number; r: number; max: number };
 
 /**
- * Interactive dot-field behind the hero. Dots are displaced by the cursor
- * and ease back to their grid positions. Static under reduced motion.
+ * Interactive dot-field behind the hero. Dots breathe on their own, are
+ * displaced by the cursor, and clicking sends a shockwave rippling
+ * through the grid. Static under reduced motion.
  */
 export default function HeroCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -26,6 +31,7 @@ export default function HeroCanvas() {
     if (!ctx) return;
 
     let dots: Dot[] = [];
+    const waves: Wave[] = [];
     let width = 0;
     let height = 0;
     let raf = 0;
@@ -60,6 +66,7 @@ export default function HeroCanvas() {
       ctx.clearRect(0, 0, width, height);
       // Ambient breathing so the field feels alive even without a cursor.
       const t = reduced ? 0 : performance.now() / 1000;
+
       for (const d of dots) {
         const dx = d.x - mouse.x;
         const dy = d.y - mouse.y;
@@ -70,6 +77,20 @@ export default function HeroCanvas() {
           d.x += (dx / dist) * force * 0.22;
           d.y += (dy / dist) * force * 0.22;
         }
+
+        // Shockwaves push dots outward as their front passes through.
+        for (const w of waves) {
+          const wx = d.x - w.x;
+          const wy = d.y - w.y;
+          const wd = Math.hypot(wx, wy);
+          const band = Math.abs(wd - w.r);
+          if (band < WAVE_BAND && wd > 0.01) {
+            const force = (1 - band / WAVE_BAND) ** 2 * WAVE_PUSH;
+            d.x += (wx / wd) * force * 0.3;
+            d.y += (wy / wd) * force * 0.3;
+          }
+        }
+
         d.x += (d.ox - d.x) * RETURN;
         d.y += (d.oy - d.y) * RETURN;
 
@@ -88,6 +109,22 @@ export default function HeroCanvas() {
             ? `rgba(216, 164, 255, ${0.25 + heat * 0.55})`
             : `rgba(191, 95, 255, ${0.14 + pulse * 0.14})`;
         ctx.fill();
+      }
+
+      // Expanding rings for active shockwaves.
+      for (let i = waves.length - 1; i >= 0; i--) {
+        const w = waves[i];
+        w.r += WAVE_SPEED;
+        const alpha = Math.max(0, 1 - w.r / w.max);
+        if (alpha <= 0) {
+          waves.splice(i, 1);
+          continue;
+        }
+        ctx.beginPath();
+        ctx.arc(w.x, w.y, w.r, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(191, 95, 255, ${alpha * 0.35})`;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
       }
     };
 
@@ -120,10 +157,21 @@ export default function HeroCanvas() {
       mouse.x = -9999;
       mouse.y = -9999;
     };
+    const onPointerDown = (e: PointerEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      if (y < 0 || y > height) return;
+      waves.push({ x, y, r: 0, max: Math.hypot(width, height) });
+      if (waves.length > 4) waves.shift();
+    };
 
     if (finePointer && !reduced) {
       window.addEventListener("mousemove", onMove, { passive: true });
       document.documentElement.addEventListener("mouseleave", onLeave);
+    }
+    if (!reduced) {
+      canvas.parentElement!.addEventListener("pointerdown", onPointerDown);
     }
 
     const ro = new ResizeObserver(() => {
@@ -145,6 +193,7 @@ export default function HeroCanvas() {
       io.disconnect();
       window.removeEventListener("mousemove", onMove);
       document.documentElement.removeEventListener("mouseleave", onLeave);
+      canvas.parentElement?.removeEventListener("pointerdown", onPointerDown);
     };
   }, [reduced, finePointer]);
 
