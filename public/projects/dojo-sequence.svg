@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-label="Dojo Sequence poster">
+  <style>
+    .ds-input {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: ds-input 2.8s ease-out infinite;
+      opacity: 0.3;
+    }
+    .ds-input.s2 { animation-delay: 0.35s; }
+    .ds-input.s3 { animation-delay: 0.7s; }
+    .ds-input.s4 { animation-delay: 1.05s; }
+    @keyframes ds-input {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      8% { opacity: 1; transform: scale(1.12); }
+      30% { opacity: 0.85; transform: scale(1); }
+      60% { opacity: 0.3; }
+    }
+    .ds-flash { animation: ds-flash 2.8s ease-out infinite; opacity: 0; }
+    @keyframes ds-flash {
+      0%, 38%, 100% { opacity: 0; }
+      42% { opacity: 0.9; }
+      60% { opacity: 0; }
+    }
+    .ds-stage { animation: ds-stage 5.6s steps(1) infinite; }
+    @keyframes ds-stage {
+      0%, 100% { fill-opacity: 0.9; }
+      50% { fill-opacity: 0.4; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; }
+      .ds-input { opacity: 0.9; }
+    }
+  </style>
+  <rect width="1600" height="1200" fill="#131311"/>
+  <g stroke="#e9e7e1" stroke-opacity="0.06">
+    <line x1="0" y1="400" x2="1600" y2="400"/>
+    <line x1="0" y1="800" x2="1600" y2="800"/>
+    <line x1="533" y1="0" x2="533" y2="1200"/>
+    <line x1="1066" y1="0" x2="1066" y2="1200"/>
+  </g>
+
+  <!-- input notation: f, n, d, d/f + 2 -->
+  <g class="ds-input">
+    <circle cx="380" cy="560" r="86" fill="none" stroke="#e9e7e1" stroke-opacity="0.5" stroke-width="3"/>
+    <path d="M340 560h64m0 0l-24-24m24 24l-24 24" stroke="#e9e7e1" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g class="ds-input s2">
+    <circle cx="600" cy="560" r="86" fill="none" stroke="#e9e7e1" stroke-opacity="0.5" stroke-width="3"/>
+    <circle cx="600" cy="560" r="14" fill="#e9e7e1"/>
+  </g>
+  <g class="ds-input s3">
+    <circle cx="820" cy="560" r="86" fill="none" stroke="#e9e7e1" stroke-opacity="0.5" stroke-width="3"/>
+    <path d="M820 520v64m0 0l-24-24m24 24l24-24" stroke="#e9e7e1" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g class="ds-input s4">
+    <circle cx="1040" cy="560" r="86" fill="none" stroke="#bf5fff" stroke-width="3"/>
+    <path d="M1012 532l52 52m0 0v-38m0 38h-38" stroke="#bf5fff" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g>
+    <circle cx="1260" cy="560" r="86" fill="#bf5fff"/>
+    <text x="1260" y="588" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="76" fill="#131311">2</text>
+    <circle class="ds-flash" cx="1260" cy="560" r="110" fill="none" stroke="#bf5fff" stroke-width="3"/>
+  </g>
+  <text x="1260" y="700" text-anchor="middle" font-family="monospace" font-size="22" letter-spacing="5" fill="#bf5fff" fill-opacity="0.8">JUST FRAME</text>
+
+  <!-- stage progression track -->
+  <g>
+    <rect class="ds-stage" x="380" y="880" width="70" height="14" fill="#bf5fff"/>
+    <rect x="470" y="880" width="70" height="14" fill="#bf5fff" fill-opacity="0.9"/>
+    <rect x="560" y="880" width="70" height="14" fill="#bf5fff" fill-opacity="0.9"/>
+    <rect x="650" y="880" width="70" height="14" fill="#bf5fff" fill-opacity="0.9"/>
+    <rect x="740" y="880" width="70" height="14" fill="#bf5fff" fill-opacity="0.5"/>
+    <rect x="830" y="880" width="70" height="14" fill="#e9e7e1" fill-opacity="0.15"/>
+    <rect x="920" y="880" width="70" height="14" fill="#e9e7e1" fill-opacity="0.15"/>
+    <rect x="1010" y="880" width="70" height="14" fill="#e9e7e1" fill-opacity="0.15"/>
+  </g>
+  <text x="380" y="940" font-family="monospace" font-size="20" letter-spacing="4" fill="#e9e7e1" fill-opacity="0.35">STAGE 05 / 08 — CORE COMBOS</text>
+
+  <text x="72" y="112" font-family="monospace" font-size="26" letter-spacing="6" fill="#e9e7e1" fill-opacity="0.55">DOJO SEQUENCE — 04</text>
+  <text x="72" y="1128" font-family="monospace" font-size="22" letter-spacing="5" fill="#e9e7e1" fill-opacity="0.35">KAZUYA / 45 DRILLS / 8 STAGES</text>
+  <text x="1528" y="1128" text-anchor="end" font-family="monospace" font-size="22" letter-spacing="5" fill="#bf5fff" fill-opacity="0.8">LEARN→DRILL→PASS</text>
+</svg>

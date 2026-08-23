@@ -118,6 +118,35 @@ export const projects: Project[] = [
     repo: "https://github.com/UmaisNisar/TandooriTasteWebsite",
     layout: "right",
   },
+  {
+    slug: "dojo-sequence",
+    index: "04",
+    title: "Dojo Sequence",
+    category: "Training Platform",
+    year: "2026",
+    client: "Self-initiated",
+    role: "Design & Development",
+    description:
+      "A structured training curriculum for learning Tekken 8 characters — learn, drill, pass, unlock the next skill.",
+    overview:
+      "Fighting games teach terribly: a hundred-move list and a shrug. Dojo Sequence turns learning a Tekken 8 character into a strict, ordered curriculum — it ships with a complete Kazuya course of 45 training items across 8 stages, from movement to full gameplan, with frame data cross-verified against TekkenDocs and Wavu Wiki and execution tips written for leverless players.",
+    challenge:
+      "Practice only works when it's measurable and ordered. The app had to know what you should practice right now, refuse to mark a skill learned until its pass condition is genuinely met, and keep frame data trustworthy across game patches — all without a backend.",
+    approach:
+      "A linear unlock system: stages and items open in strict order, while locked content stays visible so the road ahead is always on screen. A Today screen answers 'what should I practice right now?', and already-learned skills resurface for retention based on how stale they've become.",
+    interaction:
+      "Session mode runs a fast loop over your next items plus retention reps. Drills are measurable — consecutive reps, accuracy sets, timed holds, concept checks — and the whole app is built to sit on a phone next to your controller, with an in-app reduce-motion toggle.",
+    development:
+      "Fully static Next.js App Router with everything running in the browser — progress lives in localStorage with validated JSON export/import. Frame data has a single source of truth per character, stamped with game version, and the app background-checks it against Wavu Wiki's live database daily, highlighting values a patch has changed.",
+    result:
+      "Live and free at dojo-sequence.vercel.app — a complete, patch-aware Kazuya curriculum with no accounts, no database, no server.",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Motion", "localStorage"],
+    image: "/projects/dojo-sequence.svg",
+    imageAlt: "Dojo Sequence — arcade input notation lighting up in order",
+    live: "https://dojo-sequence.vercel.app",
+    repo: "https://github.com/UmaisNisar/dojo-sequence",
+    layout: "wide",
+  },
 ];
 
 export function getProject(slug: string) {
