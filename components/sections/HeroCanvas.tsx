@@ -5,13 +5,14 @@ import { useFinePointer, usePrefersReducedMotion } from "@/lib/hooks";
 
 const SPACING = 60;
 const INFLUENCE = 190; // px radius of cursor influence
-const PUSH = 30; // max displacement
-const RETURN = 0.075; // lerp back to rest
-const WAVE_SPEED = 12;
-const WAVE_BAND = 80; // thickness of the shockwave front
-const WAVE_PUSH = 30;
+const PUSH = 30; // max cursor force
+const SPRING = 0.045; // pull back toward the grid position
+const DAMPING = 0.86; // velocity decay — leaves a little overshoot wobble
+const BURST_RADIUS = 480; // click impulse reach
+const BURST_KICK = 26; // max impulse velocity
+const WAVE_SPEED = 14; // purely visual ring
 
-type Dot = { ox: number; oy: number; x: number; y: number };
+type Dot = { ox: number; oy: number; x: number; y: number; vx: number; vy: number };
 type Wave = { x: number; y: number; r: number; max: number };
 
 /**
@@ -57,7 +58,7 @@ export default function HeroCanvas() {
         for (let c = 0; c < cols; c++) {
           const ox = c * SPACING;
           const oy = r * SPACING;
-          dots.push({ ox, oy, x: ox, y: oy });
+          dots.push({ ox, oy, x: ox, y: oy, vx: 0, vy: 0 });
         }
       }
     };
@@ -74,25 +75,17 @@ export default function HeroCanvas() {
 
         if (dist < INFLUENCE && dist > 0.01) {
           const force = (1 - dist / INFLUENCE) ** 2 * PUSH;
-          d.x += (dx / dist) * force * 0.22;
-          d.y += (dy / dist) * force * 0.22;
+          d.vx += (dx / dist) * force * 0.045;
+          d.vy += (dy / dist) * force * 0.045;
         }
 
-        // Shockwaves push dots outward as their front passes through.
-        for (const w of waves) {
-          const wx = d.x - w.x;
-          const wy = d.y - w.y;
-          const wd = Math.hypot(wx, wy);
-          const band = Math.abs(wd - w.r);
-          if (band < WAVE_BAND && wd > 0.01) {
-            const force = (1 - band / WAVE_BAND) ** 2 * WAVE_PUSH;
-            d.x += (wx / wd) * force * 0.3;
-            d.y += (wy / wd) * force * 0.3;
-          }
-        }
-
-        d.x += (d.ox - d.x) * RETURN;
-        d.y += (d.oy - d.y) * RETURN;
+        // Spring back home with a bit of bounce.
+        d.vx += (d.ox - d.x) * SPRING;
+        d.vy += (d.oy - d.y) * SPRING;
+        d.vx *= DAMPING;
+        d.vy *= DAMPING;
+        d.x += d.vx;
+        d.y += d.vy;
 
         const phase = (d.ox + d.oy) * 0.012;
         const driftX = Math.sin(t * 0.55 + phase) * 3.2;
@@ -162,7 +155,20 @@ export default function HeroCanvas() {
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       if (y < 0 || y > height) return;
-      waves.push({ x, y, r: 0, max: Math.hypot(width, height) });
+
+      // Radial impulse — dots leap away, the spring brings them back.
+      for (const d of dots) {
+        const dx = d.x - x;
+        const dy = d.y - y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < BURST_RADIUS && dist > 0.01) {
+          const kick = (1 - dist / BURST_RADIUS) ** 1.6 * BURST_KICK;
+          d.vx += (dx / dist) * kick;
+          d.vy += (dy / dist) * kick;
+        }
+      }
+
+      waves.push({ x, y, r: 0, max: BURST_RADIUS * 1.4 });
       if (waves.length > 4) waves.shift();
     };
 
