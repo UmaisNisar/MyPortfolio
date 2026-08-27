@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-label="Macronaut poster">
+  <style>
+    .mn-gauge {
+      stroke-dasharray: 1140;
+      animation: mn-gauge 5s cubic-bezier(0.65, 0, 0.35, 1) infinite alternate;
+    }
+    @keyframes mn-gauge {
+      from { stroke-dashoffset: 560; }
+      to { stroke-dashoffset: 285; }
+    }
+    .mn-momo {
+      animation: mn-momo 4.5s ease-in-out infinite;
+    }
+    @keyframes mn-momo {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-22px); }
+    }
+    .mn-eye {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: mn-blink 4.2s infinite;
+    }
+    @keyframes mn-blink {
+      0%, 90%, 96%, 100% { transform: scaleY(1); }
+      93% { transform: scaleY(0.1); }
+    }
+    .mn-bar {
+      transform-box: fill-box;
+      transform-origin: left;
+      animation: mn-bar 4s ease-in-out infinite alternate;
+    }
+    .mn-bar.d2 { animation-delay: 0.6s; }
+    .mn-bar.d3 { animation-delay: 1.2s; }
+    @keyframes mn-bar {
+      from { transform: scaleX(0.72); }
+      to { transform: scaleX(1); }
+    }
+    .mn-star { animation: mn-star 3s ease-in-out infinite; }
+    .mn-star.d2 { animation-delay: 1s; }
+    .mn-star.d3 { animation-delay: 2s; }
+    @keyframes mn-star {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 0.9; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; }
+      .mn-gauge { stroke-dashoffset: 285; }
+    }
+  </style>
+  <rect width="1600" height="1200" fill="#131312"/>
+  <g stroke="#e9e7e1" stroke-opacity="0.06">
+    <line x1="0" y1="600" x2="1600" y2="600"/>
+    <line x1="800" y1="0" x2="800" y2="1200"/>
+  </g>
+
+  <!-- twinkling stars -->
+  <g fill="#e9e7e1">
+    <path class="mn-star" d="M300 220l4 10 10 4-10 4-4 10-4-10-10-4 10-4z"/>
+    <path class="mn-star d2" d="M1310 180l4 10 10 4-10 4-4 10-4-10-10-4 10-4z"/>
+    <path class="mn-star d3" d="M1420 820l4 10 10 4-10 4-4 10-4-10-10-4 10-4z"/>
+    <circle class="mn-star d2" cx="220" cy="880" r="3"/>
+    <circle class="mn-star" cx="1180" cy="960" r="3"/>
+  </g>
+
+  <!-- fuel core gauge -->
+  <g fill="none" stroke-linecap="round">
+    <circle cx="560" cy="600" r="182" stroke="#e9e7e1" stroke-opacity="0.15" stroke-width="18"/>
+    <circle class="mn-gauge" cx="560" cy="600" r="182" stroke="#bf5fff" stroke-width="18" transform="rotate(-90 560 600)"/>
+  </g>
+  <text x="560" y="585" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="88" fill="#e9e7e1">1840</text>
+  <text x="560" y="650" text-anchor="middle" font-family="monospace" font-size="24" letter-spacing="6" fill="#e9e7e1" fill-opacity="0.45">KCAL / 2200</text>
+  <text x="560" y="880" text-anchor="middle" font-family="monospace" font-size="22" letter-spacing="6" fill="#bf5fff" fill-opacity="0.8">FUEL CORE</text>
+
+  <!-- Momo the mascot, floating -->
+  <g class="mn-momo">
+    <line x1="1060" y1="380" x2="1060" y2="345" stroke="#bf5fff" stroke-width="5"/>
+    <circle cx="1060" cy="338" r="9" fill="#bf5fff"/>
+    <circle cx="1060" cy="470" r="92" fill="#bf5fff"/>
+    <circle cx="1060" cy="470" r="92" fill="none" stroke="#e9e7e1" stroke-opacity="0.25"/>
+    <ellipse class="mn-eye" cx="1032" cy="458" rx="9" ry="14" fill="#131312"/>
+    <ellipse class="mn-eye" cx="1088" cy="458" rx="9" ry="14" fill="#131312"/>
+    <path d="M1038 496q22 18 44 0" stroke="#131312" stroke-width="6" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- macro bars -->
+  <g>
+    <text x="960" y="680" font-family="monospace" font-size="22" letter-spacing="5" fill="#e9e7e1" fill-opacity="0.45">PROTEIN</text>
+    <rect x="960" y="695" width="380" height="16" fill="#e9e7e1" fill-opacity="0.1"/>
+    <rect class="mn-bar" x="960" y="695" width="310" height="16" fill="#bf5fff"/>
+    <text x="960" y="770" font-family="monospace" font-size="22" letter-spacing="5" fill="#e9e7e1" fill-opacity="0.45">CARBS</text>
+    <rect x="960" y="785" width="380" height="16" fill="#e9e7e1" fill-opacity="0.1"/>
+    <rect class="mn-bar d2" x="960" y="785" width="250" height="16" fill="#bf5fff" fill-opacity="0.7"/>
+    <text x="960" y="860" font-family="monospace" font-size="22" letter-spacing="5" fill="#e9e7e1" fill-opacity="0.45">FAT</text>
+    <rect x="960" y="875" width="380" height="16" fill="#e9e7e1" fill-opacity="0.1"/>
+    <rect class="mn-bar d3" x="960" y="875" width="180" height="16" fill="#bf5fff" fill-opacity="0.45"/>
+  </g>
+
+  <text x="160" y="112" font-family="monospace" font-size="26" letter-spacing="6" fill="#e9e7e1" fill-opacity="0.55">MACRONAUT — 05</text>
+  <text x="160" y="1128" font-family="monospace" font-size="22" letter-spacing="5" fill="#e9e7e1" fill-opacity="0.35">"TWO EGGS AND TOAST" → 340 KCAL / 18P 28C 16F</text>
+  <text x="1440" y="112" text-anchor="end" font-family="monospace" font-size="22" letter-spacing="5" fill="#bf5fff" fill-opacity="0.8">MISSION CONTROL</text>
+</svg>

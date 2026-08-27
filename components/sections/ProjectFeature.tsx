@@ -92,6 +92,11 @@ function Meta({ project, align = "left" }: { project: Project; align?: "left" | 
 }
 
 function Title({ project, size = "large" }: { project: Project; size?: "large" | "medium" }) {
+  // Long unbreakable titles (e.g. MACRONAUT) must fit the side column:
+  // scale the medium size down by the longest word's length.
+  const maxWord = Math.max(...project.title.split(" ").map((w) => w.length));
+  const mediumVw = Math.min(4.5, 30 / maxWord);
+
   return (
     <span className="flex items-baseline gap-4 md:gap-6">
       <span className="u-label -translate-y-1 text-accent md:-translate-y-3">
@@ -107,7 +112,7 @@ function Title({ project, size = "large" }: { project: Project; size?: "large" |
             fontSize:
               size === "large"
                 ? "clamp(2.75rem, 8.5vw, 8rem)"
-                : "clamp(2.25rem, 5.5vw, 5rem)",
+                : `clamp(1.75rem, ${mediumVw}vw, 4.25rem)`,
           }}
         >
           {project.title.toUpperCase()}

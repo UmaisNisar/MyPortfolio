@@ -147,6 +147,35 @@ export const projects: Project[] = [
     repo: "https://github.com/UmaisNisar/dojo-sequence",
     layout: "wide",
   },
+  {
+    slug: "macronaut",
+    index: "05",
+    title: "Macronaut",
+    category: "AI-Powered PWA",
+    year: "2026",
+    client: "Self-initiated",
+    role: "Design & Full-Stack Development",
+    description:
+      "Mission control for your body — describe what you ate in plain English and an AI works out the calories and macros.",
+    overview:
+      "Macronaut is a nutrition and weight tracker built around one idea: logging food should take a sentence, not a database search. An LLM turns plain-English meals into calories and macros, and the app keeps the long record — meals, weight, goals, trends — to answer the only question that matters: am I actually improving? It's a bright, candy-coloured little world with a hand-drawn mascot called Momo, in light and dark.",
+    challenge:
+      "Food trackers die from friction and guilt: per-ingredient database searches, and coaching that scolds. Macronaut had to make logging effortless, keep the AI honest without ever being preachy — and stay fully usable with zero configuration, no keys, no account.",
+    approach:
+      "An instrument-panel Today screen (the Fuel Core), a colour-coded history calendar where any past day reopens with the targets of that day, period-vs-period progress comparisons, and AI period reviews with streaks and achievements. Hand-drawn SVG illustration everywhere, so it feels like a place rather than a spreadsheet.",
+    interaction:
+      "Type what you ate in plain English and macros appear; an AI debrief comments on the day. A five-step onboarding computes and previews your plan live, and the whole thing installs on a phone as a real PWA — its own icon, launcher shortcuts and an offline screen.",
+    development:
+      "Next.js App Router with Gemini strictly server-side, and Supabase for auth (including Google sign-in) and Postgres with row-level security scoping every row to its user. With no keys at all it degrades gracefully into solo mode: a local JSON store, a built-in food-table estimator and deterministic coaching — add keys and it upgrades in place.",
+    result:
+      "Live at macronaut-lemon.vercel.app — installable, usable end-to-end with zero configuration, and honest about your trend line either way.",
+    technologies: ["Next.js", "TypeScript", "Gemini", "Supabase", "PWA"],
+    image: "/projects/macronaut.svg",
+    imageAlt: "Macronaut — fuel gauge, floating mascot and macro bars",
+    live: "https://macronaut-lemon.vercel.app",
+    repo: "https://github.com/UmaisNisar/macronaut",
+    layout: "left",
+  },
 ];
 
 export function getProject(slug: string) {
