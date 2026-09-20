@@ -51,11 +51,11 @@ export const projects: Project[] = [
     approach:
       "An instrument-panel Today screen (the Fuel Core), a colour-coded history calendar where any past day reopens with the targets of that day, period-vs-period progress comparisons, and AI period reviews with streaks and achievements. Hand-drawn SVG illustration everywhere, so it feels like a place rather than a spreadsheet.",
     interaction:
-      "Type what you ate in plain English and macros appear; an AI debrief comments on the day. A five-step onboarding computes and previews your plan live, and the whole thing installs on a phone as a real PWA — its own icon, launcher shortcuts and an offline screen.",
+      "Type what you ate in plain English and macros appear; an AI debrief comments on the day. A five-step onboarding computes and previews your plan live, and the whole thing installs on a phone as a real PWA — its own icon, launcher shortcuts and an offline screen. A native Expo rewrite for iOS and Android is underway as a separate project.",
     development:
       "Next.js App Router with Gemini strictly server-side, and Supabase for auth (including Google sign-in) and Postgres with row-level security scoping every row to its user. With no keys at all it degrades gracefully into solo mode: a local JSON store, a built-in food-table estimator and deterministic coaching — add keys and it upgrades in place.",
     result:
-      "Live at macronaut-lemon.vercel.app — installable, usable end-to-end with zero configuration, and honest about your trend line either way.",
+      "Live at macronaut-lemon.vercel.app and in daily use — installable, usable end-to-end with zero configuration, and honest about your trend line either way.",
     technologies: ["Next.js", "TypeScript", "Gemini", "Supabase", "PWA"],
     image: "/projects/macronaut.svg",
     imageAlt: "Macronaut — fuel gauge, floating mascot and macro bars",
@@ -64,36 +64,65 @@ export const projects: Project[] = [
     layout: "wide",
   },
   {
-    slug: "invest-advisor",
+    slug: "finsight",
     index: "02",
-    title: "InvestAdvisor",
-    category: "AI-Powered Web App",
+    title: "FinSight",
+    category: "AI Finance Analyzer",
     year: "2026",
     client: "Personal product",
     role: "Design & Full-Stack Development",
     description:
-      "A personal AI investment advisor that watches my portfolio, screens the market and tells me where to look next.",
+      "An AI personal finance analyzer that reads your bank statements and explains where your money goes.",
     overview:
-      "InvestAdvisor is a single-user investment monitoring and advisory tool I built for my own portfolio. It pulls holdings and live market data, has an LLM review the entire portfolio in one pass, and surfaces per-holding calls — add, hold, trim or sell — each with a conviction level and a data-grounded reason, plus a daily cross-asset shortlist of where to look next.",
+      "FinSight finds statements in Gmail — or takes the PDFs you download from your bank — extracts every transaction, categorizes spending, detects subscriptions and unusual charges, and has Gemini write plain-language insights. The rule underneath everything: FinSight calculates every number; the AI only explains them, and its answers are validated against the real figures before you ever see them.",
     challenge:
-      "LLM output is only useful for investing if it can be trusted not to hallucinate. Every call had to be grounded in real numbers, API costs had to stay near zero, and the data layer had to cover stocks, ETFs and crypto across three currencies — using only free-tier sources.",
+      "Bank statements are hostile input — every bank lays out its PDFs differently, with debit/credit columns, running balances, wrapped descriptions and card statements carrying two dates. And an LLM cannot be trusted with arithmetic about your money, so the pipeline had to make hallucinated numbers structurally impossible.",
     approach:
-      "A percentile-rank factor model (growth, valuation, momentum, quality, analyst and insider signals) forms the quantitative spine. The LLM narrates on top of scored data instead of inventing figures, and the consolidated daily analysis is capped to a single call to control cost. The dashboard surfaces the strongest calls first.",
+      "The pipeline is split so the AI never does math. A layout-aware parser handles the bank formats and marks statements that reconcile as high confidence. Categorization runs rules first and asks the AI only about merchants it doesn't know — and your corrections become rules for future imports. Gemini's summaries are checked against computed figures before display.",
     interaction:
-      "A responsive MudBlazor dashboard that works on a phone: drop in a Wealthsimple CSV export and holdings reconstruct themselves into quotable tickers, a watchlist fires on price targets, and email alerts flag drift or critical warnings.",
+      "A guided onboarding asks how you get statements, connects Gmail or walks you through your bank, and helps you add your own Gemini key. For banks that only send 'your eStatement is ready' alerts, FinSight surfaces each month with a trusted sign-in link and one-click upload. The interface is Apple Liquid Glass — translucent materials, loading states sized like their content, motion for everything that appears.",
     development:
-      "C# and Blazor end to end. Multi-source pricing stitches together Finnhub for US equities, Yahoo Finance for international listings, CoinGecko for crypto and Frankfurter for FX — with everything converted to USD at live rates for totals and P/L.",
+      ".NET 10 API with a React 19 + strict TypeScript frontend, CI on every push. Private by design: PDFs are never stored, account numbers are masked to the last four digits, tokens and keys are encrypted, and every user's data is isolated at the database layer.",
     result:
-      "It's now my daily research tool — portfolio-wide analysis on demand without a premium data subscription, while every trade decision stays human.",
-    technologies: ["C#", ".NET", "Blazor", "MudBlazor", "LLM APIs", "SQL"],
-    image: "/projects/invest-advisor.svg",
-    imageAlt: "InvestAdvisor — market signal line with portfolio call markers",
-    repo: "https://github.com/UmaisNisar/InvestAdvisor",
+      "Statement months land automatically, every insight is checked against the real figures — my own money, finally explained in plain language.",
+    technologies: [".NET 10", "C#", "React 19", "TypeScript", "Gemini", "Gmail API"],
+    image: "/projects/finsight.svg",
+    imageAlt: "FinSight — statement being scanned into categorized spending bars",
+    repo: "https://github.com/UmaisNisar/finsight",
     layout: "left",
   },
   {
-    slug: "dojo-sequence",
+    slug: "fpl-autopilot",
     index: "03",
+    title: "FPL Autopilot",
+    category: "Decision Engine",
+    year: "2026",
+    client: "Personal product",
+    role: "Design & Development",
+    description:
+      "A one-button Fantasy Premier League decision engine — open it before the deadline, press Analyze, get the plan.",
+    overview:
+      "One screen, one button. Before each deadline you press Analyze My Team and get a single concrete plan: the transfer to make (or not), who to captain, the starting XI and bench order, and whether to play a chip. It's built for one manager — no accounts, no database, no leaderboards.",
+    challenge:
+      "Ask an LLM 'who should I transfer?' and you get confident nonsense. The model had to be kept away from open questions entirely. And the FPL API refuses to reveal a brand-new manager's squad until their first deadline passes — exactly when planning matters most.",
+    approach:
+      "A deterministic engine does the analysis first: component-wise expected points, fixture analysis, and transfer evaluation validated walk-forward against real seasons. Gemini only reviews the computed result and writes the reasoning — it is never asked an open question, and a validator guards its output.",
+    interaction:
+      "Enter your manager ID once and it's remembered. If the API can't reveal your squad yet, the app detects it and opens a squad builder instead — pick your fifteen, and the analysis becomes a squad review with free unlimited transfers, because that's what pre-season actually is.",
+    development:
+      "Next.js 15 with TypeScript. The engine lives in a typed library (expected points, projections, transfer evaluation) separate from the UI, a mock mode runs a canned plan for UI work without burning API calls, and deployments can be locked to an allowlist of manager IDs.",
+    result:
+      "Live at fpl-autopilot-seven.vercel.app — every gameweek since launch, the plan has been one button away.",
+    technologies: ["Next.js 15", "TypeScript", "Gemini", "FPL API"],
+    image: "/projects/fpl-autopilot.svg",
+    imageAlt: "FPL Autopilot — formation dots on a pitch with a transfer arrow",
+    live: "https://fpl-autopilot-seven.vercel.app",
+    repo: "https://github.com/UmaisNisar/fpl-autopilot",
+    layout: "right",
+  },
+  {
+    slug: "dojo-sequence",
+    index: "04",
     title: "Dojo Sequence",
     category: "Training Platform",
     year: "2026",
@@ -121,8 +150,36 @@ export const projects: Project[] = [
     layout: "wide",
   },
   {
+    slug: "invest-advisor",
+    index: "05",
+    title: "InvestAdvisor",
+    category: "AI-Powered Web App",
+    year: "2026",
+    client: "Personal product",
+    role: "Design & Full-Stack Development",
+    description:
+      "A personal AI investment advisor that watches my portfolio, screens the market and tells me where to look next.",
+    overview:
+      "InvestAdvisor is a single-user investment monitoring and advisory tool I built for my own portfolio. It pulls holdings and live market data, has an LLM review the entire portfolio in one pass, and surfaces per-holding calls — add, hold, trim or sell — each with a conviction level and a data-grounded reason, plus a daily cross-asset shortlist of where to look next.",
+    challenge:
+      "LLM output is only useful for investing if it can be trusted not to hallucinate. Every call had to be grounded in real numbers, API costs had to stay near zero, and the data layer had to cover stocks, ETFs and crypto across three currencies — using only free-tier sources.",
+    approach:
+      "A percentile-rank factor model (growth, valuation, momentum, quality, analyst and insider signals) forms the quantitative spine. The LLM narrates on top of scored data instead of inventing figures, and the consolidated daily analysis is capped to a single call to control cost. The dashboard surfaces the strongest calls first.",
+    interaction:
+      "A responsive MudBlazor dashboard that works on a phone: drop in a Wealthsimple CSV export and holdings reconstruct themselves into quotable tickers, a watchlist fires on price targets, and email alerts flag drift or critical warnings.",
+    development:
+      "C# and Blazor end to end. Multi-source pricing stitches together Finnhub for US equities, Yahoo Finance for international listings, CoinGecko for crypto and Frankfurter for FX — with everything converted to USD at live rates for totals and P/L.",
+    result:
+      "My daily research tool — portfolio-wide analysis on demand without a premium data subscription, while every trade decision stays human.",
+    technologies: ["C#", ".NET", "Blazor", "MudBlazor", "LLM APIs", "SQL"],
+    image: "/projects/invest-advisor.svg",
+    imageAlt: "InvestAdvisor — market signal line with portfolio call markers",
+    repo: "https://github.com/UmaisNisar/InvestAdvisor",
+    layout: "left",
+  },
+  {
     slug: "tandoori-tastes",
-    index: "04",
+    index: "06",
     title: "Tandoori Tastes",
     category: "Restaurant Site & CMS",
     year: "2025",
@@ -148,34 +205,6 @@ export const projects: Project[] = [
     live: "https://tandoori-taste-website.vercel.app",
     repo: "https://github.com/UmaisNisar/TandooriTasteWebsite",
     layout: "right",
-  },
-  {
-    slug: "the-hidden-gem",
-    index: "05",
-    title: "The Hidden Gem",
-    category: "Photography Portfolio",
-    year: "2025",
-    client: "The Hidden Gem",
-    role: "Design & Development",
-    description:
-      "A portfolio and booking site for a sports photography and videography studio — built to let the work lead.",
-    overview:
-      "The Hidden Gem shoots sports — action photography, team photos, event coverage and highlight reels. Their site is a portfolio-first experience where galleries and video carry the story, backed by a booking flow so a visit can turn directly into a session.",
-    challenge:
-      "Sports photography lives on energy, and most portfolio templates flatten it. The site had to frame heavy imagery without stealing attention from it, stay fast on phones where most visitors arrive, and turn interest into bookings without a back-and-forth email chain.",
-    approach:
-      "Gallery-first information architecture: photography and reels front and center, services and booking one gesture away. Motion is used to give stills momentum — transitions and reveals that echo the pace of the sports being shot.",
-    interaction:
-      "Interactive galleries for browsing shoots, a video section for highlight reels, an integrated session-booking flow and a direct contact form.",
-    development:
-      "Next.js with TypeScript and Tailwind CSS, Radix UI primitives for accessible components, React Hook Form for the booking and contact flows, and Framer Motion for the animation layer.",
-    result:
-      "Shipped as the studio's home on the web — galleries, reels and session booking in one place.",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Radix UI", "Framer Motion"],
-    image: "/projects/the-hidden-gem.svg",
-    imageAlt: "The Hidden Gem — camera aperture blades and frame markings",
-    repo: "https://github.com/UmaisNisar/the-hidden-gem",
-    layout: "left",
   },
 ];
 

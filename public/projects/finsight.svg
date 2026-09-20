@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-label="FinSight poster">
+  <style>
+    .fs-scan {
+      animation: fs-scan 4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+    }
+    @keyframes fs-scan {
+      0% { transform: translateY(0); opacity: 0; }
+      8% { opacity: 1; }
+      85% { opacity: 1; }
+      100% { transform: translateY(560px); opacity: 0; }
+    }
+    .fs-bar {
+      transform-box: fill-box;
+      transform-origin: left;
+      animation: fs-bar 4.2s ease-in-out infinite alternate;
+    }
+    .fs-bar.d2 { animation-delay: 0.5s; }
+    .fs-bar.d3 { animation-delay: 1s; }
+    .fs-bar.d4 { animation-delay: 1.5s; }
+    @keyframes fs-bar {
+      from { transform: scaleX(0.7); }
+      to { transform: scaleX(1); }
+    }
+    .fs-check { animation: fs-check 4s steps(1) infinite; }
+    @keyframes fs-check {
+      0%, 80% { opacity: 0.25; }
+      81%, 100% { opacity: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; }
+      .fs-scan { opacity: 0; }
+    }
+  </style>
+  <rect width="1600" height="1200" fill="#131312"/>
+  <g stroke="#e9e7e1" stroke-opacity="0.06">
+    <line x1="800" y1="0" x2="800" y2="1200"/>
+    <line x1="0" y1="600" x2="1600" y2="600"/>
+  </g>
+
+  <!-- bank statement page -->
+  <g>
+    <rect x="240" y="260" width="440" height="640" fill="#1b1b19" stroke="#e9e7e1" stroke-opacity="0.3"/>
+    <text x="280" y="330" font-family="monospace" font-size="22" letter-spacing="4" fill="#e9e7e1" fill-opacity="0.55">STATEMENT</text>
+    <text x="640" y="330" text-anchor="end" font-family="monospace" font-size="20" letter-spacing="3" fill="#e9e7e1" fill-opacity="0.35">**** 4821</text>
+    <g stroke="#e9e7e1" stroke-opacity="0.22">
+      <line x1="280" y1="380" x2="640" y2="380"/>
+      <line x1="280" y1="430" x2="600" y2="430"/>
+      <line x1="280" y1="480" x2="640" y2="480"/>
+      <line x1="280" y1="530" x2="560" y2="530"/>
+      <line x1="280" y1="580" x2="640" y2="580"/>
+      <line x1="280" y1="630" x2="590" y2="630"/>
+      <line x1="280" y1="680" x2="640" y2="680"/>
+      <line x1="280" y1="730" x2="570" y2="730"/>
+      <line x1="280" y1="780" x2="640" y2="780"/>
+    </g>
+    <!-- scan line sweeping the page -->
+    <rect class="fs-scan" x="240" y="290" width="440" height="4" fill="#bf5fff" fill-opacity="0.9"/>
+    <text class="fs-check" x="280" y="860" font-family="monospace" font-size="20" letter-spacing="4" fill="#bf5fff">RECONCILED ✓</text>
+  </g>
+
+  <!-- arrow -->
+  <path d="M740 580h120m0 0l-28-28m28 28l-28 28" stroke="#bf5fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- categorized spending -->
+  <g font-family="monospace" font-size="20" letter-spacing="4">
+    <text x="960" y="400" fill="#e9e7e1" fill-opacity="0.45">GROCERIES</text>
+    <rect x="960" y="415" width="400" height="16" fill="#e9e7e1" fill-opacity="0.1"/>
+    <rect class="fs-bar" x="960" y="415" width="330" height="16" fill="#bf5fff"/>
+    <text x="960" y="500" fill="#e9e7e1" fill-opacity="0.45">RENT</text>
+    <rect x="960" y="515" width="400" height="16" fill="#e9e7e1" fill-opacity="0.1"/>
+    <rect class="fs-bar d2" x="960" y="515" width="380" height="16" fill="#bf5fff" fill-opacity="0.8"/>
+    <text x="960" y="600" fill="#e9e7e1" fill-opacity="0.45">SUBSCRIPTIONS</text>
+    <rect x="960" y="615" width="400" height="16" fill="#e9e7e1" fill-opacity="0.1"/>
+    <rect class="fs-bar d3" x="960" y="615" width="150" height="16" fill="#bf5fff" fill-opacity="0.6"/>
+    <text x="1130" y="630" fill="#bf5fff" fill-opacity="0.8" font-size="18">▲ 2 NEW</text>
+    <text x="960" y="700" fill="#e9e7e1" fill-opacity="0.45">DINING</text>
+    <rect x="960" y="715" width="400" height="16" fill="#e9e7e1" fill-opacity="0.1"/>
+    <rect class="fs-bar d4" x="960" y="715" width="210" height="16" fill="#bf5fff" fill-opacity="0.45"/>
+  </g>
+  <text x="960" y="810" font-family="monospace" font-size="20" letter-spacing="4" fill="#e9e7e1" fill-opacity="0.35">SAVINGS RATE 22% — CHECKED AGAINST REAL FIGURES</text>
+
+  <text x="160" y="112" font-family="monospace" font-size="26" letter-spacing="6" fill="#e9e7e1" fill-opacity="0.55">FINSIGHT — 02</text>
+  <text x="160" y="1128" font-family="monospace" font-size="22" letter-spacing="5" fill="#e9e7e1" fill-opacity="0.35">GMAIL → PARSE → RECONCILE → EXPLAIN</text>
+  <text x="1440" y="112" text-anchor="end" font-family="monospace" font-size="22" letter-spacing="5" fill="#bf5fff" fill-opacity="0.8">AI NEVER DOES MATH</text>
+</svg>
