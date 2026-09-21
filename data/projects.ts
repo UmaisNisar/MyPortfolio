@@ -27,6 +27,7 @@ export type Project = {
   image: string;
   imageAlt: string;
   /** Optional outbound links shown on the detail page. */
+  demo?: string;
   live?: string;
   repo?: string;
   /** Controls the editorial composition on the home page. */
@@ -175,6 +176,7 @@ export const projects: Project[] = [
     technologies: ["C#", ".NET", "Blazor", "MudBlazor", "LLM APIs", "SQL"],
     image: "/projects/invest-advisor.svg",
     imageAlt: "InvestAdvisor — market signal line with portfolio call markers",
+    demo: "https://demo.investadvisor.space",
     live: "https://invest.investadvisor.space",
     repo: "https://github.com/UmaisNisar/InvestAdvisor",
     layout: "left",

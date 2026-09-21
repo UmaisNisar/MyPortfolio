@@ -125,10 +125,22 @@ export default function ProjectView({
               ))}
             </ul>
 
-            {(project.live || project.repo) && (
+            {(project.demo || project.live || project.repo) && (
               <>
                 <p className="u-label mt-10 text-muted-dark">LINKS</p>
                 <ul className="mt-4 flex flex-col gap-2">
+                  {project.demo && (
+                    <li>
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="u-label flex items-center justify-between border-b border-accent/40 pb-2 text-accent transition-colors hover:text-paper"
+                      >
+                        TRY THE LIVE DEMO <span className="text-accent">↗</span>
+                      </a>
+                    </li>
+                  )}
                   {project.live && (
                     <li>
                       <a
