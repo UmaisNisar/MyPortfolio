@@ -175,6 +175,7 @@ export const projects: Project[] = [
     technologies: ["C#", ".NET", "Blazor", "MudBlazor", "LLM APIs", "SQL"],
     image: "/projects/invest-advisor.svg",
     imageAlt: "InvestAdvisor — market signal line with portfolio call markers",
+    live: "https://invest.investadvisor.space",
     repo: "https://github.com/UmaisNisar/InvestAdvisor",
     layout: "left",
   },
