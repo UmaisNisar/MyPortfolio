@@ -88,6 +88,7 @@ export const projects: Project[] = [
     technologies: [".NET 10", "C#", "React 19", "TypeScript", "Gemini", "Gmail API"],
     image: "/projects/finsight.svg",
     imageAlt: "FinSight — statement being scanned into categorized spending bars",
+    live: "https://finsightmax.duckdns.org",
     repo: "https://github.com/UmaisNisar/finsight",
     layout: "left",
   },
